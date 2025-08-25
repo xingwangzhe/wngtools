@@ -9,6 +9,6 @@
     "core:default",
     "core:tray:default",
     "core:app:allow-default-window-icon",
-    "core:window:allow-create"
+    "core:webview:allow-create-webview-window"
   ]
 }

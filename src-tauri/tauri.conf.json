@@ -37,5 +37,21 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "window": {
+      "allowlist": [
+        "create",
+        "show",
+        "hide",
+        "close",
+        "setFocus"
+      ]
+    },
+    "webview": {
+      "allowlist": [
+        "create-webview-window"
+      ]
+    }
   }
 }

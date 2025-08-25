@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^2.8.0",
+    "@tauri-apps/plugin-autostart": "~2",
     "astro": "^5.13.3"
   },
   "devDependencies": {

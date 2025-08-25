@@ -2,30 +2,14 @@ import { Window } from "@tauri-apps/api/window"
 import { TrayIcon } from '@tauri-apps/api/tray';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { Menu } from '@tauri-apps/api/menu';
+import { filespace } from './filespace';
+import { autostart } from "./autostart";
+// 直接创建系统托盘，不等待DOM加载完成
+setupTray();
 
-// 等待DOM加载完成后再创建托盘
-document.addEventListener('DOMContentLoaded', async () => {
+async function setupTray() {
   try {
     // 创建菜单项
-    const toggleItem = {
-      id: 'toggle',
-      text: '创建文件中转',
-      action: async () => {
-        const appWindow = new Window('filespace', {
-          title: '文件中转站',
-          width: 400,
-          height: 300,
-          alwaysOnTop: true,
-          visible: true,
-          resizable: true,
-          decorations: true
-        });
-        appWindow.once('tauri://window-created', () => {
-          console.log('文件中转窗口已创建');
-        });
-      }
-    };
-
     const quitItem = {
       id: 'quit',
       text: '退出'
@@ -33,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // 创建菜单
     const menu = await Menu.new({
-      items: [toggleItem, quitItem]
+      items: [filespace, quitItem,autostart]
     });
 
     // 配置托盘图标选项
@@ -59,4 +43,4 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
     console.error('创建系统托盘失败:', error);
   }
-});
+}
