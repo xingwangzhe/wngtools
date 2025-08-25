@@ -1,4 +1,4 @@
-import { Window } from "@tauri-apps/api/window"
+// import { Window } from "@tauri-apps/api/window"
 import { TrayIcon } from '@tauri-apps/api/tray';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { Menu } from '@tauri-apps/api/menu';
