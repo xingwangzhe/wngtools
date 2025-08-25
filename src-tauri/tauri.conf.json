@@ -21,6 +21,10 @@
     ],
     "security": {
       "csp": null
+    },
+    "trayIcon": {
+      "iconPath": "icons/icon.ico",
+      "tooltip": "Wngtools"
     }
   },
   "bundle": {
