@@ -4,7 +4,14 @@ use tauri::tray::TrayIconBuilder;
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_process::init())
-        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {}))
+        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
+            println!(
+                "单实例启动: app={:?}, args={:?}, cwd={:?}",
+                app.package_info().name,
+                args,
+                cwd
+            );
+        }))
         .plugin(tauri_plugin_autostart::Builder::new().build())
         .setup(|app| {
             if cfg!(debug_assertions) {
