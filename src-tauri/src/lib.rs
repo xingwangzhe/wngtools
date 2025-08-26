@@ -1,5 +1,3 @@
-use tauri::tray::TrayIconBuilder;
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -27,14 +25,6 @@ pub fn run() {
         })
         .plugin(tauri_plugin_positioner::init())
         // This is required to get tray-relative positions to work
-        .setup(|app| {
-            TrayIconBuilder::new()
-                .on_tray_icon_event(|app, event| {
-                    tauri_plugin_positioner::on_tray_event(app.app_handle(), &event);
-                })
-                .build(app)?;
-            Ok(())
-        })
         .plugin(tauri_plugin_persisted_scope::init())
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
