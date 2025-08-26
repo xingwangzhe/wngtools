@@ -6,6 +6,7 @@
       "dependencies": {
         "@tauri-apps/api": "^2.8.0",
         "@tauri-apps/plugin-autostart": "~2",
+        "@tauri-apps/plugin-fs": "~2",
         "@tauri-apps/plugin-notification": "~2",
         "@tauri-apps/plugin-positioner": "^2.3.0",
         "@tauri-apps/plugin-process": "^2.3.0",
@@ -218,6 +219,8 @@
     "@tauri-apps/cli-win32-x64-msvc": ["@tauri-apps/cli-win32-x64-msvc@2.8.2", "https://registry.npmmirror.com/@tauri-apps/cli-win32-x64-msvc/-/cli-win32-x64-msvc-2.8.2.tgz", { "os": "win32", "cpu": "x64" }, "sha512-nVbBXQC0FIjkPmr1Fq+yqwZvVLBE2zID4Ilc9wt0JsOa6TrKaGPGFc17NZW2RA2RaLeErhlcnKFUL0tmnPIZgA=="],
 
     "@tauri-apps/plugin-autostart": ["@tauri-apps/plugin-autostart@2.5.0", "https://registry.npmmirror.com/@tauri-apps/plugin-autostart/-/plugin-autostart-2.5.0.tgz", { "dependencies": { "@tauri-apps/api": "^2.6.0" } }, "sha512-smSt0vydfVB950AeYRbO2S/c01SZrgMVg4FOrFLQLom0R0amsu/8zYaxgttriBdxcofjBZuHv4hmROBQIBVXmA=="],
+
+    "@tauri-apps/plugin-fs": ["@tauri-apps/plugin-fs@2.4.2", "https://registry.npmmirror.com/@tauri-apps/plugin-fs/-/plugin-fs-2.4.2.tgz", { "dependencies": { "@tauri-apps/api": "^2.8.0" } }, "sha512-YGhmYuTgXGsi6AjoV+5mh2NvicgWBfVJHHheuck6oHD+HC9bVWPaHvCP0/Aw4pHDejwrvT8hE3+zZAaWf+hrig=="],
 
     "@tauri-apps/plugin-notification": ["@tauri-apps/plugin-notification@2.3.1", "https://registry.npmmirror.com/@tauri-apps/plugin-notification/-/plugin-notification-2.3.1.tgz", { "dependencies": { "@tauri-apps/api": "^2.8.0" } }, "sha512-7gqgfANSREKhh35fY1L4j3TUjUdePmU735FYDqRGeIf8nMXWpcx6j4FhN9/4nYz+m0mv79DCTPLqIPTySggGgg=="],
 
