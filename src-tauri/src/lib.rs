@@ -3,7 +3,10 @@ use tauri::tray::TrayIconBuilder;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {}))
+        .plugin(tauri_plugin_notification::init())
+        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
+            println!("test:{:?} {:?}, cwd: {}", app,args, cwd);
+        }))
         .plugin(tauri_plugin_autostart::Builder::new().build())
         .setup(|app| {
             if cfg!(debug_assertions) {
