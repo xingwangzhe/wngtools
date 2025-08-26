@@ -1,6 +1,10 @@
 import { enable, isEnabled, disable } from '@tauri-apps/plugin-autostart';
 import { MenuItem } from '@tauri-apps/api/menu';
-
+import {
+  isPermissionGranted,
+  requestPermission,
+  sendNotification,
+} from "@tauri-apps/plugin-notification";
 // 获取当前状态文本
 export async function getAutostartStateText(): Promise<string> {
     if (await isEnabled()) {
@@ -18,13 +22,28 @@ async function updateStateText() {
 }
 
 async function changestate(){
+    let permissionGranted = await isPermissionGranted();
+    if (!permissionGranted) {
+      const permission = await requestPermission();
+      permissionGranted = permission === "granted";
+    };
     let text = '';  
     if (await isEnabled()) {
         await disable();
-        text = '已关闭自启🔴';
+        if (permissionGranted) {
+            text = '已关闭自启🔴';
+            sendNotification({ 
+                title: "Wngtools", 
+                body: "已关闭自启🔴",
+                autoCancel: true, 
+            });
+        }
     } else {
         await enable();
-        text = '已开机自启🟢';
+        if (permissionGranted) {
+            text = '已开机自启🟢';
+            sendNotification({ title: "Wngtools", body: "已开机自启🟢" });
+        }
     }
     await autostart.setText(text);
     return text;

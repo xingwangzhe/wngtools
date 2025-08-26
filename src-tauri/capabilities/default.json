@@ -13,6 +13,8 @@
     "autostart:allow-enable",
     "autostart:allow-disable",
     "autostart:allow-is-enabled",
-    "process:default"
+    "process:default",
+    "notification:default",
+    "fs:default"
   ]
 }
