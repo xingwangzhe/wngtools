@@ -4,20 +4,16 @@ import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { Menu } from '@tauri-apps/api/menu';
 import { filespace } from './filespace';
 import { autostart } from "./autostart";
+import { quitItem } from "./quitItem";
 // 直接创建系统托盘，不等待DOM加载完成
 setupTray();
 
 async function setupTray() {
   try {
-    // 创建菜单项
-    const quitItem = {
-      id: 'quit',
-      text: '退出'
-    };
     
     // 创建菜单
     const menu = await Menu.new({
-      items: [filespace, quitItem,autostart]
+      items: [filespace, autostart, quitItem]
     });
 
     // 配置托盘图标选项
