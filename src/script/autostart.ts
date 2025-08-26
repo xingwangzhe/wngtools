@@ -35,14 +35,18 @@ async function changestate(){
             sendNotification({ 
                 title: "Wngtools", 
                 body: "已关闭自启🔴",
-                autoCancel: true, 
+                sound: 'message-new-instant'
             });
         }
     } else {
         await enable();
         if (permissionGranted) {
             text = '已开机自启🟢';
-            sendNotification({ title: "Wngtools", body: "已开机自启🟢" });
+            sendNotification({ 
+                title: "Wngtools", 
+                body: "已开机自启🟢",
+                sound: 'message-new-instant'
+            });
         }
     }
     await autostart.setText(text);
