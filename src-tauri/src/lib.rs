@@ -1,9 +1,14 @@
+mod easynotification;
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_notification::init())
+        .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_process::init())
+        .plugin(tauri_plugin_positioner::init())
+        // This is required to get tray-relative positions to work
+        .plugin(tauri_plugin_persisted_scope::init())
         .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
             println!(
                 "单实例启动: app={:?}, args={:?}, cwd={:?}",
@@ -23,9 +28,9 @@ pub fn run() {
             }
             Ok(())
         })
-        .plugin(tauri_plugin_positioner::init())
-        // This is required to get tray-relative positions to work
-        .plugin(tauri_plugin_persisted_scope::init())
+        .invoke_handler(tauri::generate_handler![
+            easynotification::send_notification
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

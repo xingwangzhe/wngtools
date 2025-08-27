@@ -5,6 +5,7 @@ import {
   requestPermission,
   sendNotification,
 } from "@tauri-apps/plugin-notification";
+import { invoke } from '@tauri-apps/api/core';
 // 获取当前状态文本
 export async function getAutostartStateText(): Promise<string> {
     if (await isEnabled()) {
@@ -21,33 +22,56 @@ async function updateStateText() {
     return text;
 }
 
+// 检查并请求通知权限
+async function checkNotificationPermission(): Promise<boolean> {
+    try {
+        let permissionGranted = await isPermissionGranted();
+        console.log('当前通知权限状态:', permissionGranted);
+        if (!permissionGranted) {
+            const permission = await requestPermission();
+            console.log('请求通知权限结果:', permission);
+            permissionGranted = permission === "granted";
+        }
+        return permissionGranted;
+    } catch (error) {
+        console.error('检查通知权限时出错:', error);
+        return false;
+    }
+}
+
+// 发送通知的封装函数
+async function sendStateNotification(title: string, body: string) {
+    try {
+        const permissionGranted = await checkNotificationPermission();
+        console.log('准备发送通知，权限状态:', permissionGranted);
+        if (permissionGranted) {
+            // 使用后端命令发送通知
+            await invoke('send_notification', { 
+                title: title, 
+                body: body
+            });
+            console.log('已通过后端命令发送通知:', title, body);
+            
+            // 添加一个小延迟，确保通知被系统处理
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        } else {
+            console.log('没有通知权限，无法发送通知');
+        }
+    } catch (error) {
+        console.error('发送通知时出错:', error);
+    }
+}
+
 async function changestate(){
-    let permissionGranted = await isPermissionGranted();
-    if (!permissionGranted) {
-      const permission = await requestPermission();
-      permissionGranted = permission === "granted";
-    };
     let text = '';  
     if (await isEnabled()) {
         await disable();
-        if (permissionGranted) {
-            text = '已关闭自启🔴';
-            sendNotification({ 
-                title: "Wngtools", 
-                body: "已关闭自启🔴",
-                sound: 'message-new-instant'
-            });
-        }
+        text = '已关闭自启🔴';
+        await sendStateNotification("Wngtools", "已关闭自启🔴");
     } else {
         await enable();
-        if (permissionGranted) {
-            text = '已开机自启🟢';
-            sendNotification({ 
-                title: "Wngtools", 
-                body: "已开机自启🟢",
-                sound: 'message-new-instant'
-            });
-        }
+        text = '已开机自启🟢';
+        await sendStateNotification("Wngtools", "已开机自启🟢");
     }
     await autostart.setText(text);
     return text;
