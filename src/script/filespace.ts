@@ -1,7 +1,4 @@
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow"
-// import { TrayIcon } from '@tauri-apps/api/tray';
-// import { defaultWindowIcon } from '@tauri-apps/api/app';
-// import { Menu } from '@tauri-apps/api/menu';
 
 export const filespace = {
       id: 'toggle',

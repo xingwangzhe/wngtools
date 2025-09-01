@@ -5,11 +5,12 @@ import { Menu } from "@tauri-apps/api/menu";
 import { filespace } from "./filespace";
 import { autostart } from "./autostart";
 import { quitItem } from "./quitItem";
+import { restartItem } from "./restart";
 // 直接执行创建系统托盘的代码
 try {
   // 创建菜单
   const menu = await Menu.new({
-    items: [filespace, autostart, quitItem],
+    items: [filespace, autostart, restartItem, quitItem],
   });
 
   // 配置托盘图标选项
