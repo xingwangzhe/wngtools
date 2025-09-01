@@ -5,7 +5,6 @@ import {
   requestPermission,
   sendNotification,
 } from "@tauri-apps/plugin-notification";
-import { invoke } from '@tauri-apps/api/core';
 // 获取当前状态文本
 export async function getAutostartStateText(): Promise<string> {
     if (await isEnabled()) {
@@ -45,12 +44,12 @@ async function sendStateNotification(title: string, body: string) {
         const permissionGranted = await checkNotificationPermission();
         console.log('准备发送通知，权限状态:', permissionGranted);
         if (permissionGranted) {
-            // 使用后端命令发送通知
-            await invoke('send_notification', { 
+            // 使用前端 API 直接发送通知
+            await sendNotification({ 
                 title: title, 
                 body: body
             });
-            console.log('已通过后端命令发送通知:', title, body);
+            console.log('已通过前端 API 发送通知:', title, body);
             
             // 添加一个小延迟，确保通知被系统处理
             await new Promise(resolve => setTimeout(resolve, 1000));
