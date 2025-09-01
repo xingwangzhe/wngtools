@@ -6,6 +6,32 @@
     <title>Document</title>
 </head>
 <body>
-    这是一个文件空间页面
+    <div class="file-space" id="fileSpace">
+        这是一个空空的文件中转
+    </div>
+     <input type="file" id="fileInput" multiple style="display: none;">
 </body>
+<style>
+.file-space {
+        padding: 20px;
+        border: 1px dashed #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        text-align: center;
+        cursor: pointer;
+    }
+</style>
+<script lang="ts">
+    const fileSpace=document.getElementById('fileSpace');
+    const fileInput=document.getElementById('fileInput');
+    fileSpace.addEventListener('click',()=>{
+        fileInput.click();
+    });
+
+    fileInput.addEventListener('change',(e)=>{
+        const files = Array.from(e.target.files);
+        console.log('选中的文件',files);
+        fileSpace.textContent = `已选择文件: ${files.map(file => file.name).join(', ')}`;
+    })
+</script>
 </html>
