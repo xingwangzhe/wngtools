@@ -24,12 +24,21 @@
       background-color: #e9e9e9;
     }
     .file-space.drag-over {
-        border-color: #28a745;
-        background-color: #f0fff4;
-        border-style: solid;
+      border-color: #28a745;
+      background-color: #f0fff4;
+      border-style: solid;
     }
   </style>
-  <script is:inline>
-    
+  <script>
+    import { listen } from "@tauri-apps/api/event";
+    listen('tauri://drag-drop', (e) => {
+      console.log("Dropped files:", e);
+    });
+    listen('tauri://drag-leave', () => {
+      console.log("Drag leave");
+    });
+    listen('tauri://drag-enter', () => {
+      console.log("Drag enter");
+    });
   </script>
 </html>
