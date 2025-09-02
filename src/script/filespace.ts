@@ -4,7 +4,6 @@ export const filespace = {
       id: 'toggle',
       text: '创建文件中转',
       action: async () => {
-        try {
           // 检查是否已经存在同名窗口
           const existingWindow = await WebviewWindow.getByLabel('filespace');
           if (existingWindow) {
@@ -34,8 +33,5 @@ export const filespace = {
           appWindow.once('tauri://error', (e) => {
             console.error('创建文件中转窗口时出错:', e);
           });
-        } catch (error) {
-          console.error('处理文件中转窗口时出错:', error);
-        }
       }
 };
