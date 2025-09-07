@@ -42,18 +42,10 @@
   },
   "plugins": {
     "window": {
-      "allowlist": [
-        "create",
-        "show",
-        "hide",
-        "close",
-        "setFocus"
-      ]
+      "allowlist": ["create", "show", "hide", "close", "setFocus"]
     },
     "webview": {
-      "allowlist": [
-        "create-webview-window"
-      ]
+      "allowlist": ["create-webview-window"]
     }
   }
 }

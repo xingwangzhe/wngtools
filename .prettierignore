@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+target
+public/build
+.cache
+**/*.lock
+.idea
+.vscode
+src-tauri/target
+.git
+.husky
+pnpm-lock.yaml
+yarn.lock
+package-lock.json

@@ -7,5 +7,5 @@ import vue from '@astrojs/vue';
 export default defineConfig({
   output: 'static',
   devToolbar: { enabled: false },
-  integrations: [vue()]
+  integrations: [vue()],
 });
