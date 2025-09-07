@@ -10,29 +10,8 @@ import Files from "../components/files.vue";
     <title>Document</title>
   </head>
   <body>
-    <div class="file-space" id="fileSpace">这是一个空空的文件中转</div>
-    <input type="file" id="fileInput" multiple style="display: none;" />
     <Files client:only />
   </body>
-  <style>
-    .file-space {
-      padding: 20px;
-      border: 1px dashed #ccc;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .file-space:hover {
-      border-color: #007acc;
-      background-color: #e9e9e9;
-    }
-    .file-space.drag-over {
-      border-color: #28a745;
-      background-color: #f0fff4;
-      border-style: solid;
-    }
-  </style>
+  <style></style>
   <script></script>
 </html>

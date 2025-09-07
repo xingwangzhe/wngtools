@@ -1,11 +1,16 @@
 <template>
   <div>
-    nihao
+    <ul>
+        <li v-for="file in files" :key="file.path">
+            {{ file.name }} ({{ file.type }}) - {{ file.path }}
+        </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
     import { listen } from "@tauri-apps/api/event";
+    import { ref } from 'vue';
     
     interface DragDropPayload {
         paths: string[];
@@ -15,6 +20,9 @@
         path: string;
         type: string;
     }
+
+    const files = ref<Set<File>>(new Set());
+
     listen('tauri://drag-drop', (e) => {
         console.log("Dropped files:", e);
         const payload = e.payload as DragDropPayload;
@@ -28,6 +36,10 @@
             type: fileType
         };
         console.log("File object:", file);
+        const existingFile = Array.from(files.value).find(f => f.path === file.path);
+        if (!existingFile) {
+            files.value.add(file);
+        }
     });
     listen('tauri://drag-leave', () => {
       console.log("Drag leave");
