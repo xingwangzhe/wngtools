@@ -1,7 +1,7 @@
 <template>
   <div class="file-list">
     <ul>
-      <li v-for="file in Array.from(files)" :key="file.path" class="file-item">
+      <li v-for="file in Array.from(files)" :key="file.path" class="file-item" draggable="true">
         <img :src="getIconPath(file)" :alt="file.type + ' icon'" class="file-icon" />
         <span class="file-name">{{ file.name }}</span>
         <span class="file-type">({{ file.type }})</span>
