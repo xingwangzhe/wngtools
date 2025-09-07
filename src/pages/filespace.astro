@@ -1,3 +1,7 @@
+---
+import Files from "../components/files.vue";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,6 +12,7 @@
   <body>
     <div class="file-space" id="fileSpace">这是一个空空的文件中转</div>
     <input type="file" id="fileInput" multiple style="display: none;" />
+    <Files client:only />
   </body>
   <style>
     .file-space {
@@ -29,16 +34,5 @@
       border-style: solid;
     }
   </style>
-  <script>
-    import { listen } from "@tauri-apps/api/event";
-    listen('tauri://drag-drop', (e) => {
-      console.log("Dropped files:", e);
-    });
-    listen('tauri://drag-leave', () => {
-      console.log("Drag leave");
-    });
-    listen('tauri://drag-enter', () => {
-      console.log("Drag enter");
-    });
-  </script>
+  <script></script>
 </html>
