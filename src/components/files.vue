@@ -37,105 +37,50 @@ for (const path in iconModules) {
   iconMap[type] = path;
 }
 
-// 文件图标映射，仿照 Material Icon Theme
+// 文件图标映射，简化为7个基本类型
 const fileIconMappings = [
-  // 文件名匹配（优先级高）
-  { fileNames: ['package.json'], icon: 'npm' },
-  { fileNames: ['tsconfig.json'], icon: 'typescript' },
-  { fileNames: ['bun.lock'], icon: 'bun' },
-  { fileNames: ['yarn.lock'], icon: 'yarn' },
-  { fileNames: ['pnpm-lock.yaml'], icon: 'pnpm' },
-  { fileNames: ['dockerfile'], icon: 'docker' },
-  { fileNames: ['readme.md'], icon: 'readme' },
-  { fileNames: ['license'], icon: 'license' },
-  { fileNames: ['.gitignore'], icon: 'git' },
-  { fileNames: ['.env'], icon: 'env' },
-  // 扩展名匹配
-  { fileExtensions: ['js', 'mjs', 'cjs'], icon: 'javascript' },
-  { fileExtensions: ['ts', 'mts', 'cts'], icon: 'typescript' },
-  { fileExtensions: ['vue'], icon: 'vue' },
-  { fileExtensions: ['astro'], icon: 'astro' },
-  { fileExtensions: ['json'], icon: 'json' },
-  { fileExtensions: ['md'], icon: 'markdown' },
-  { fileExtensions: ['html'], icon: 'html' },
-  { fileExtensions: ['css'], icon: 'css' },
-  { fileExtensions: ['scss', 'sass'], icon: 'sass' },
-  { fileExtensions: ['py'], icon: 'python' },
-  { fileExtensions: ['rs'], icon: 'rust' },
-  { fileExtensions: ['go'], icon: 'go' },
-  { fileExtensions: ['java'], icon: 'java' },
-  { fileExtensions: ['cpp', 'cc', 'cxx'], icon: 'cpp' },
-  { fileExtensions: ['c'], icon: 'c' },
-  { fileExtensions: ['php'], icon: 'php' },
-  { fileExtensions: ['rb'], icon: 'ruby' },
-  { fileExtensions: ['sh'], icon: 'shell' },
-  { fileExtensions: ['bat'], icon: 'bat' },
-  { fileExtensions: ['ps1'], icon: 'powershell' },
-  { fileExtensions: ['yml', 'yaml'], icon: 'yaml' },
-  { fileExtensions: ['xml'], icon: 'xml' },
-  { fileExtensions: ['sql'], icon: 'database' },
-  { fileExtensions: ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp'], icon: 'image' },
-  { fileExtensions: ['mp4', 'avi', 'mov', 'mkv'], icon: 'video' },
-  { fileExtensions: ['mp3', 'wav', 'flac'], icon: 'audio' },
-  { fileExtensions: ['pdf'], icon: 'pdf' },
-  { fileExtensions: ['zip', 'rar', '7z', 'tar', 'gz'], icon: 'archive' },
-  { fileExtensions: ['exe'], icon: 'exe' },
-  { fileExtensions: ['dll'], icon: 'dll' },
+  // 1. 文本（纯文字，人类能直接读）
+  { fileExtensions: ['txt', 'md', 'csv', 'log', 'tex', 'rst', 'rtf', 'ini', 'conf', 'cfg'], icon: 'document' },
+  
+  // 2. 代码/标记（给人看也给编译器/解释器看）
+  { fileExtensions: ['js', 'mjs', 'cjs', 'ts', 'mts', 'cts', 'jsx', 'tsx', 'vue', 'astro', 'py', 'java', 'c', 'cpp', 'cc', 'cxx', 'h', 'hpp', 'cs', 'php', 'rb', 'go', 'rs', 'swift', 'kt', 'scala', 'clj', 'hs', 'ml', 'fs', 'vb', 'lua', 'pl', 'pm', 'r', 'sh', 'bash', 'zsh', 'fish', 'ps1', 'bat', 'cmd', 'html', 'htm', 'xhtml', 'xml', 'json', 'jsonc', 'json5', 'yaml', 'yml', 'toml', 'css', 'scss', 'sass', 'less', 'styl'], icon: 'file' },
+  
+  // 3. 表格/结构化数据
+  { fileExtensions: ['xlsx', 'xlsm', 'xls', 'xlsb', 'ods', 'csv', 'tsv', 'parquet', 'db', 'sqlite', 'sqlite3', 'mdb', 'accdb', 'dbf'], icon: 'table' },
+  
+  // 4. 图片（像素图 & 矢量）
+  { fileExtensions: ['png', 'jpeg', 'jpg', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'svg', 'eps', 'ai', 'psd', 'xcf', 'ico', 'icns'], icon: 'image' },
+  
+  // 5. 音频
+  { fileExtensions: ['mp3', 'wav', 'flac', 'aac', 'ogg', 'm4a', 'wma', 'aiff', 'au', 'mid', 'midi'], icon: 'audio' },
+  
+  // 6. 视频
+  { fileExtensions: ['mp4', 'mkv', 'avi', 'mov', 'wmv', 'flv', 'webm', 'm2ts', 'mts', 'mxf', 'vob', 'ogv', '3gp'], icon: 'video' },
+  
+  // 7. 可执行/二进制容器
+  { fileExtensions: ['exe', 'dll', 'so', 'dylib', 'deb', 'rpm', 'dmg', 'iso', 'img', 'bin', 'apk', 'ipa', 'app', 'msi', 'pkg', 'appx', 'zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'xz', 'lzma'], icon: 'exe' },
 ];
 
-// 文件夹图标映射
+// 文件夹图标映射 - 简化，只使用普通文件夹图标
 const folderIconMappings = [
-  { folderNames: ['node_modules'], icon: 'folder-node' },
-  { folderNames: ['src'], icon: 'folder-src' },
-  { folderNames: ['public'], icon: 'folder-public' },
-  { folderNames: ['dist', 'build'], icon: 'folder-dist' },
-  { folderNames: ['components'], icon: 'folder-components' },
-  { folderNames: ['pages'], icon: 'folder-pages' },
-  { folderNames: ['assets'], icon: 'folder-assets' },
-  { folderNames: ['utils', 'helpers'], icon: 'folder-utils' },
-  { folderNames: ['config', 'configs'], icon: 'folder-config' },
-  { folderNames: ['test', 'tests'], icon: 'folder-test' },
-  { folderNames: ['docs'], icon: 'folder-docs' },
-  { folderNames: ['scripts'], icon: 'folder-scripts' },
-  { folderNames: ['types'], icon: 'folder-types' },
-  { folderNames: ['styles'], icon: 'folder-styles' },
-  { folderNames: ['.git'], icon: 'folder-git' },
-  { folderNames: ['.vscode'], icon: 'folder-vscode' },
-  { folderNames: ['.github'], icon: 'folder-github' },
+  { folderNames: [], icon: 'folder' }, // 所有文件夹都使用同一个图标
 ];
 
 const getIconPath = (file: File) => {
   let iconName = 'file'; // 默认图标
 
   if (file.type === 'directory') {
-    // 文件夹匹配
-    const folderName = file.name.toLowerCase();
-    for (const mapping of folderIconMappings) {
-      if (mapping.folderNames.some((name) => folderName.includes(name))) {
-        iconName = mapping.icon;
-        break;
-      }
-    }
+    // 所有文件夹都使用同一个图标
+    iconName = 'folder';
   } else {
-    // 文件匹配
-    const fileName = file.name.toLowerCase();
+    // 文件匹配 - 只使用扩展名匹配
     const fileExt = file.type.toLowerCase().replace(/^\./, '');
 
-    // 首先检查文件名匹配（优先级高）
+    // 检查扩展名匹配
     for (const mapping of fileIconMappings) {
-      if (mapping.fileNames && mapping.fileNames.some((name) => fileName === name.toLowerCase())) {
+      if (mapping.fileExtensions && mapping.fileExtensions.includes(fileExt)) {
         iconName = mapping.icon;
         break;
-      }
-    }
-
-    // 如果没有文件名匹配，检查扩展名匹配
-    if (iconName === 'file') {
-      for (const mapping of fileIconMappings) {
-        if (mapping.fileExtensions && mapping.fileExtensions.includes(fileExt)) {
-          iconName = mapping.icon;
-          break;
-        }
       }
     }
   }
