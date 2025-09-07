@@ -40,25 +40,174 @@ for (const path in iconModules) {
 // 文件图标映射，简化为7个基本类型
 const fileIconMappings = [
   // 1. 文本（纯文字，人类能直接读）
-  { fileExtensions: ['txt', 'md', 'csv', 'log', 'tex', 'rst', 'rtf', 'ini', 'conf', 'cfg'], icon: 'document' },
-  
+  {
+    fileExtensions: ['txt', 'md', 'csv', 'log', 'tex', 'rst', 'rtf', 'ini', 'conf', 'cfg'],
+    icon: 'document',
+  },
+
   // 2. 代码/标记（给人看也给编译器/解释器看）
-  { fileExtensions: ['js', 'mjs', 'cjs', 'ts', 'mts', 'cts', 'jsx', 'tsx', 'vue', 'astro', 'py', 'java', 'c', 'cpp', 'cc', 'cxx', 'h', 'hpp', 'cs', 'php', 'rb', 'go', 'rs', 'swift', 'kt', 'scala', 'clj', 'hs', 'ml', 'fs', 'vb', 'lua', 'pl', 'pm', 'r', 'sh', 'bash', 'zsh', 'fish', 'ps1', 'bat', 'cmd', 'html', 'htm', 'xhtml', 'xml', 'json', 'jsonc', 'json5', 'yaml', 'yml', 'toml', 'css', 'scss', 'sass', 'less', 'styl'], icon: 'file' },
-  
+  {
+    fileExtensions: [
+      'js',
+      'mjs',
+      'cjs',
+      'ts',
+      'mts',
+      'cts',
+      'jsx',
+      'tsx',
+      'vue',
+      'astro',
+      'py',
+      'java',
+      'c',
+      'cpp',
+      'cc',
+      'cxx',
+      'h',
+      'hpp',
+      'cs',
+      'php',
+      'rb',
+      'go',
+      'rs',
+      'swift',
+      'kt',
+      'scala',
+      'clj',
+      'hs',
+      'ml',
+      'fs',
+      'vb',
+      'lua',
+      'pl',
+      'pm',
+      'r',
+      'sh',
+      'bash',
+      'zsh',
+      'fish',
+      'ps1',
+      'bat',
+      'cmd',
+      'html',
+      'htm',
+      'xhtml',
+      'xml',
+      'json',
+      'jsonc',
+      'json5',
+      'yaml',
+      'yml',
+      'toml',
+      'css',
+      'scss',
+      'sass',
+      'less',
+      'styl',
+    ],
+    icon: 'file',
+  },
+
   // 3. 表格/结构化数据
-  { fileExtensions: ['xlsx', 'xlsm', 'xls', 'xlsb', 'ods', 'csv', 'tsv', 'parquet', 'db', 'sqlite', 'sqlite3', 'mdb', 'accdb', 'dbf'], icon: 'table' },
-  
+  {
+    fileExtensions: [
+      'xlsx',
+      'xlsm',
+      'xls',
+      'xlsb',
+      'ods',
+      'csv',
+      'tsv',
+      'parquet',
+      'db',
+      'sqlite',
+      'sqlite3',
+      'mdb',
+      'accdb',
+      'dbf',
+    ],
+    icon: 'table',
+  },
+
   // 4. 图片（像素图 & 矢量）
-  { fileExtensions: ['png', 'jpeg', 'jpg', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'svg', 'eps', 'ai', 'psd', 'xcf', 'ico', 'icns'], icon: 'image' },
-  
+  {
+    fileExtensions: [
+      'png',
+      'jpeg',
+      'jpg',
+      'gif',
+      'bmp',
+      'webp',
+      'tiff',
+      'tif',
+      'svg',
+      'eps',
+      'ai',
+      'psd',
+      'xcf',
+      'ico',
+      'icns',
+    ],
+    icon: 'image',
+  },
+
   // 5. 音频
-  { fileExtensions: ['mp3', 'wav', 'flac', 'aac', 'ogg', 'm4a', 'wma', 'aiff', 'au', 'mid', 'midi'], icon: 'audio' },
-  
+  {
+    fileExtensions: ['mp3', 'wav', 'flac', 'aac', 'ogg', 'm4a', 'wma', 'aiff', 'au', 'mid', 'midi'],
+    icon: 'audio',
+  },
+
   // 6. 视频
-  { fileExtensions: ['mp4', 'mkv', 'avi', 'mov', 'wmv', 'flv', 'webm', 'm2ts', 'mts', 'mxf', 'vob', 'ogv', '3gp'], icon: 'video' },
-  
+  {
+    fileExtensions: [
+      'mp4',
+      'mkv',
+      'avi',
+      'mov',
+      'wmv',
+      'flv',
+      'webm',
+      'm2ts',
+      'mts',
+      'mxf',
+      'vob',
+      'ogv',
+      '3gp',
+    ],
+    icon: 'video',
+  },
+
   // 7. 可执行/二进制容器
-  { fileExtensions: ['exe', 'dll', 'so', 'dylib', 'deb', 'rpm', 'dmg', 'iso', 'img', 'bin', 'apk', 'ipa', 'app', 'msi', 'pkg', 'appx', 'zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'xz', 'lzma'], icon: 'exe' },
+  {
+    fileExtensions: [
+      'exe',
+      'dll',
+      'so',
+      'dylib',
+      'deb',
+      'rpm',
+      'dmg',
+      'iso',
+      'img',
+      'bin',
+      'apk',
+      'ipa',
+      'app',
+      'msi',
+      'pkg',
+      'appx',
+      'zip',
+      'rar',
+      '7z',
+      'tar',
+      'gz',
+      'bz2',
+      'xz',
+      'lzma',
+    ],
+    icon: 'exe',
+  },
 ];
 
 // 文件夹图标映射 - 简化，只使用普通文件夹图标
