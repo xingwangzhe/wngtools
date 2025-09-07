@@ -32,22 +32,25 @@ listen('tauri://drag-drop', async (e) => {
   console.log('Dropped files:', payload?.paths[0]);
   const fullPath = payload?.paths[0];
   const meta = await stat(fullPath); // 返回 Metadata
-  if (meta.isDirectory) {
-    const dirname = await basename(fullPath);
-    const filetype = 'directory';
+  let fileName = '';
+  let fileType = '';
+  let dirname = '';
+  if (!meta.isFile) {
+    dirname = await basename(fullPath);
+    fileType = 'directory';
   } else if (meta.isFile) {
-    const fileType = await extname(fullPath);
-    const fileName = await basename(fullPath);
-    let file: File = {
-      name: fileName,
-      path: fullPath,
-      type: fileType,
-    };
-    console.log('File object:', file);
-    const existingFile = Array.from(files.value).find((f) => f.path === file.path);
-    if (!existingFile) {
-      files.value.add(file);
-    }
+    fileType = await extname(fullPath);
+    fileName = await basename(fullPath);
+  }
+  let file: File = {
+    name: fileName || dirname,
+    path: fullPath,
+    type: fileType,
+  };
+  console.log('File object:', file);
+  const existingFile = Array.from(files.value).find((f) => f.path === file.path);
+  if (!existingFile) {
+    files.value.add(file);
   }
 });
 listen('tauri://drag-leave', () => {
