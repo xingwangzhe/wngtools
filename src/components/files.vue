@@ -68,3 +68,4 @@ listen('tauri://drag-enter', () => {
 </script>
 
 <style></style>
+<div></div>
