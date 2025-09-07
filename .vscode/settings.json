@@ -11,6 +11,24 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll": "explicit",
+    "source.fixAll.oxc": "explicit"
+  },
+  // Oxc 配置
+  "oxc.enable": true,
+  "oxc.format.enabled": false, // 让 Prettier 处理格式化
+  "oxc.lint.run": "onType",
+  "oxc.lint.debounce": 100,
+  "oxc.path": "oxlint",
+  // 只在 JS/TS 文件上启用 oxc
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // 禁用 Astro 文件的 oxc
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
   }
 }

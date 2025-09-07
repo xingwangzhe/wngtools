@@ -1,0 +1,32 @@
+{
+  "rules": {
+    "correctness": "warn",
+    "suspicious": "warn",
+    "pedantic": "off",
+    "style": "off",
+    "nursery": "off",
+    "restriction": "off",
+    "eslint(no-unused-vars)": "off"
+  },
+  "allow": ["console"],
+  "deny": ["debugger"],
+  "warn": [],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "correctness": "error",
+        "suspicious": "error",
+        "eslint(no-unused-vars)": "error"
+      }
+    },
+    {
+      "files": ["*.astro"],
+      "rules": {
+        "correctness": "off",
+        "suspicious": "off",
+        "eslint(no-unused-vars)": "off"
+      }
+    }
+  ]
+}

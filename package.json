@@ -6,7 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "oxlint src/components src/script --ignore-pattern '**/*.astro'",
+    "lint:fix": "oxlint --fix src/components src/script --ignore-pattern '**/*.astro'",
+    "lint:astro": "echo 'Astro files are not fully supported by oxlint yet'",
+    "format": "prettier --write .",
+    "check": "oxlint src/components src/script --ignore-pattern '**/*.astro' && prettier --check ."
   },
   "dependencies": {
     "@astrojs/vue": "^5.1.0",
@@ -20,6 +25,8 @@
     "vue": "^3.5.21"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.8.3"
+    "@tauri-apps/cli": "^2.8.3",
+    "oxlint": "^0.9.0",
+    "prettier": "^3.3.0"
   }
 }
