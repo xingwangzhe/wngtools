@@ -4,25 +4,50 @@ import type {} from 'vue';
 
 type FileLike = { type?: string; path?: string };
 
-// 使用 Vite 的 import.meta.glob 动态导入 icons 目录下的 svg
-const iconModules = import.meta.glob('/src/assets/icons/*.svg', { eager: true }) as Record<
-  string,
-  any
->;
-const iconMap: Record<string, string> = {};
+// 直接导入每个图标文件（作为 URL）
+import audioIcon from '../../assets/icons/audio.svg?url';
+import documentIcon from '../../assets/icons/document.svg?url';
+import exeIcon from '../../assets/icons/exe.svg?url';
+import fileIcon from '../../assets/icons/file.svg?url';
+import folderIcon from '../../assets/icons/folder.svg?url';
+import imageIcon from '../../assets/icons/image.svg?url';
+import tableIcon from '../../assets/icons/table.svg?url';
+import videoIcon from '../../assets/icons/video.svg?url';
 
-for (const p in iconModules) {
-  const name = p.split('/').pop()?.replace('.svg', '') || '';
-  const mod = iconModules[p];
-  // Vite 的 eager 导入会把模块默认导出放在 default
-  const url = (mod && (mod.default || mod)) || p;
-  iconMap[name] = url;
-}
+// 手动构建 iconMap
+const iconMap: Record<string, string> = {
+  audio: audioIcon,
+  document: documentIcon,
+  exe: exeIcon,
+  file: fileIcon,
+  folder: folderIcon,
+  image: imageIcon,
+  table: tableIcon,
+  video: videoIcon,
+};
+
+console.log('IconMap built manually:', iconMap);
 
 // 7 类文件映射（与项目现有分类保持一致）
 const fileIconMappings = [
   {
-    fileExtensions: ['txt', 'md', 'csv', 'log', 'tex', 'rst', 'rtf', 'ini', 'conf', 'cfg'],
+    fileExtensions: [
+      'txt',
+      'md',
+      'csv',
+      'log',
+      'tex',
+      'rst',
+      'rtf',
+      'ini',
+      'conf',
+      'cfg',
+      'readme',
+      'changelog',
+      'license',
+      'authors',
+      'contributors',
+    ],
     icon: 'document',
   },
   {
@@ -84,6 +109,16 @@ const fileIconMappings = [
       'sass',
       'less',
       'styl',
+      'dockerfile',
+      'makefile',
+      'cmake',
+      'gradle',
+      'maven',
+      'cargo.toml',
+      'package.json',
+      'requirements.txt',
+      'pipfile',
+      'poetry.lock',
     ],
     icon: 'file',
   },
@@ -103,6 +138,9 @@ const fileIconMappings = [
       'mdb',
       'accdb',
       'dbf',
+      'accdb',
+      'numbers',
+      'gsheet',
     ],
     icon: 'table',
   },
@@ -123,11 +161,36 @@ const fileIconMappings = [
       'xcf',
       'ico',
       'icns',
+      'heic',
+      'heif',
+      'raw',
+      'cr2',
+      'nef',
+      'arw',
+      'dng',
     ],
     icon: 'image',
   },
   {
-    fileExtensions: ['mp3', 'wav', 'flac', 'aac', 'ogg', 'm4a', 'wma', 'aiff', 'au', 'mid', 'midi'],
+    fileExtensions: [
+      'mp3',
+      'wav',
+      'flac',
+      'aac',
+      'ogg',
+      'm4a',
+      'wma',
+      'aiff',
+      'au',
+      'mid',
+      'midi',
+      'flac',
+      'alac',
+      'dsd',
+      'dsd',
+      'ape',
+      'wv',
+    ],
     icon: 'audio',
   },
   {
@@ -145,6 +208,11 @@ const fileIconMappings = [
       'vob',
       'ogv',
       '3gp',
+      'm4v',
+      'f4v',
+      'f4p',
+      'f4a',
+      'f4b',
     ],
     icon: 'video',
   },
@@ -174,6 +242,16 @@ const fileIconMappings = [
       'bz2',
       'xz',
       'lzma',
+      'tgz',
+      'tbz2',
+      'txz',
+      'jar',
+      'war',
+      'ear',
+      'nupkg',
+      'gem',
+      'whl',
+      'egg',
     ],
     icon: 'exe',
   },
@@ -189,15 +267,28 @@ export function getIconPath(file: FileLike) {
     iconName = defaultFolderIcon;
   } else {
     const fileExt = (file.type || '').toLowerCase().replace(/^\./, '');
+    console.log('File extension:', fileExt, 'for file:', file); // 调试信息
+
     for (const mapping of fileIconMappings) {
       if (mapping.fileExtensions && mapping.fileExtensions.includes(fileExt)) {
         iconName = mapping.icon;
+        console.log('Matched icon:', iconName); // 调试信息
         break;
       }
     }
   }
 
-  return iconMap[iconName] || iconMap[defaultFileIcon] || '/src/assets/icons/file.svg';
+  // 确保图标存在，否则使用默认图标
+  const iconUrl = iconMap[iconName];
+  if (iconUrl) {
+    console.log('Using icon URL:', iconUrl); // 调试信息
+    return iconUrl;
+  }
+
+  // 如果找不到对应图标，使用默认文件图标
+  const fallbackUrl = iconMap[defaultFileIcon] || iconMap[defaultFolderIcon] || '';
+  console.log('Using fallback icon URL:', fallbackUrl); // 调试信息
+  return fallbackUrl;
 }
 
 export { iconMap };
