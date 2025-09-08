@@ -5,14 +5,14 @@ import type {} from 'vue';
 type FileLike = { type?: string; path?: string };
 
 // 直接导入每个图标文件（作为 URL）
-import audioIcon from '../../assets/icons/audio.svg?url';
-import documentIcon from '../../assets/icons/document.svg?url';
-import exeIcon from '../../assets/icons/exe.svg?url';
-import fileIcon from '../../assets/icons/file.svg?url';
-import folderIcon from '../../assets/icons/folder.svg?url';
-import imageIcon from '../../assets/icons/image.svg?url';
-import tableIcon from '../../assets/icons/table.svg?url';
-import videoIcon from '../../assets/icons/video.svg?url';
+import audioIcon from '../../../assets/icons/audio.svg?url';
+import documentIcon from '../../../assets/icons/document.svg?url';
+import exeIcon from '../../../assets/icons/exe.svg?url';
+import fileIcon from '../../../assets/icons/file.svg?url';
+import folderIcon from '../../../assets/icons/folder.svg?url';
+import imageIcon from '../../../assets/icons/image.svg?url';
+import tableIcon from '../../../assets/icons/table.svg?url';
+import videoIcon from '../../../assets/icons/video.svg?url';
 
 // 手动构建 iconMap
 const iconMap: Record<string, string> = {
@@ -25,8 +25,6 @@ const iconMap: Record<string, string> = {
   table: tableIcon,
   video: videoIcon,
 };
-
-console.log('IconMap built manually:', iconMap);
 
 // 7 类文件映射（与项目现有分类保持一致）
 const fileIconMappings = [
@@ -267,12 +265,10 @@ export function getIconPath(file: FileLike) {
     iconName = defaultFolderIcon;
   } else {
     const fileExt = (file.type || '').toLowerCase().replace(/^\./, '');
-    console.log('File extension:', fileExt, 'for file:', file); // 调试信息
 
     for (const mapping of fileIconMappings) {
       if (mapping.fileExtensions && mapping.fileExtensions.includes(fileExt)) {
         iconName = mapping.icon;
-        console.log('Matched icon:', iconName); // 调试信息
         break;
       }
     }
@@ -281,13 +277,11 @@ export function getIconPath(file: FileLike) {
   // 确保图标存在，否则使用默认图标
   const iconUrl = iconMap[iconName];
   if (iconUrl) {
-    console.log('Using icon URL:', iconUrl); // 调试信息
     return iconUrl;
   }
 
   // 如果找不到对应图标，使用默认文件图标
   const fallbackUrl = iconMap[defaultFileIcon] || iconMap[defaultFolderIcon] || '';
-  console.log('Using fallback icon URL:', fallbackUrl); // 调试信息
   return fallbackUrl;
 }
 

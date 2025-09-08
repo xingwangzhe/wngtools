@@ -1,7 +1,13 @@
 <template>
   <div class="file-list">
     <ul>
-      <li v-for="file in Array.from(files)" :key="file.path" class="file-item" draggable="true">
+      <li
+        v-for="file in Array.from(files)"
+        :key="file.path"
+        class="file-item"
+        draggable="true"
+        @dragstart="handleDragStart($event, file)"
+      >
         <img :src="getIconPath(file)" :alt="file.type + ' icon'" class="file-icon" />
         <span class="file-name">{{ file.name }}</span>
         <span class="file-type">({{ file.type }})</span>
@@ -14,12 +20,16 @@
 <script lang="ts" setup>
 import { listen } from '@tauri-apps/api/event';
 import { ref } from 'vue';
-import { extname, basename } from '@tauri-apps/api/path'; // 使用 Path API
-import { stat } from '@tauri-apps/plugin-fs';
+
+// 导入拖拽处理器
+import { handleDragStart, handleFileDrop } from './script/files/dragHandler';
+// 导入图标映射
+import { getIconPath } from './script/files/iconMap';
 
 interface DragDropPayload {
   paths: string[];
 }
+
 interface File {
   name: string;
   path: string;
@@ -28,42 +38,18 @@ interface File {
 
 const files = ref<Set<File>>(new Set());
 
-// 图标加载与映射由外部模块提供
-import { getIconPath } from './script/iconMap';
-
-listen('tauri://drag-drop', async (e) => {
-  console.log('Dropped files:', e);
-  const payload = e.payload as DragDropPayload;
-  if (!payload?.paths) return;
-  console.log('Dropped files:', payload?.paths[0]);
-  const fullPath = payload?.paths[0];
-  const meta = await stat(fullPath); // 返回 Metadata
-  let fileName = '';
-  let fileType = '';
-  let dirname = '';
-  if (!meta.isFile) {
-    dirname = await basename(fullPath);
-    fileType = 'directory';
-  } else if (meta.isFile) {
-    fileType = await extname(fullPath);
-    fileName = await basename(fullPath);
-  }
-  let file: File = {
-    name: fileName || dirname,
-    path: fullPath,
-    type: fileType,
-  };
-  console.log('File object:', file);
+// 添加文件的函数
+const addFile = (file: File) => {
   const existingFile = Array.from(files.value).find((f) => f.path === file.path);
   if (!existingFile) {
     files.value.add(file);
   }
-});
-listen('tauri://drag-leave', () => {
-  console.log('Drag leave');
-});
-listen('tauri://drag-enter', () => {
-  console.log('Drag enter');
+};
+
+// 监听文件拖拽到应用中的事件
+listen('tauri://drag-drop', async (e) => {
+  const payload = e.payload as DragDropPayload;
+  await handleFileDrop(payload, addFile);
 });
 </script>
 
