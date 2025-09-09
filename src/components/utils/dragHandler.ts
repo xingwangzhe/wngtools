@@ -1,15 +1,14 @@
 // 文件拖拽处理器模块
 // 负责处理从应用内部拖拽文件到外部系统的逻辑
 
+import type { DragDropPayload, File } from '../../types/file';
+
 /**
  * 处理拖拽开始事件
  * @param event 拖拽事件对象
  * @param file 文件对象
  */
-export const handleDragStart = (
-  event: DragEvent,
-  file: { path: string; name: string; type: string },
-) => {
+export const handleDragStart = (event: DragEvent, file: File) => {
   // 设置拖拽数据为文件路径和URI
   event.dataTransfer?.setData('text/plain', file.path);
   event.dataTransfer?.setData('text/uri-list', `file://${file.path}`);
@@ -23,10 +22,7 @@ export const handleDragStart = (
  * @param payload 拖拽载荷
  * @param addFile 回调函数，用于添加文件到列表
  */
-export const handleFileDrop = async (
-  payload: { paths: string[] },
-  addFile: (file: { name: string; path: string; type: string }) => void,
-) => {
+export const handleFileDrop = async (payload: DragDropPayload, addFile: (file: File) => void) => {
   if (!payload?.paths?.length) return;
 
   const fullPath = payload.paths[0];

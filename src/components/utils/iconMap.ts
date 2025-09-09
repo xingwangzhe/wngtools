@@ -1,18 +1,17 @@
 // iconMap.ts
 // 负责加载图标并提供 getIconPath 工具函数
 import type {} from 'vue';
-
-type FileLike = { type?: string; path?: string };
+import type { File } from '../../types/file';
 
 // 直接导入每个图标文件（作为 URL）
-import audioIcon from '../../../assets/icons/audio.svg?url';
-import documentIcon from '../../../assets/icons/document.svg?url';
-import exeIcon from '../../../assets/icons/exe.svg?url';
-import fileIcon from '../../../assets/icons/file.svg?url';
-import folderIcon from '../../../assets/icons/folder.svg?url';
-import imageIcon from '../../../assets/icons/image.svg?url';
-import tableIcon from '../../../assets/icons/table.svg?url';
-import videoIcon from '../../../assets/icons/video.svg?url';
+import audioIcon from '../../assets/icons/audio.svg?url';
+import documentIcon from '../../assets/icons/document.svg?url';
+import exeIcon from '../../assets/icons/exe.svg?url';
+import fileIcon from '../../assets/icons/file.svg?url';
+import folderIcon from '../../assets/icons/folder.svg?url';
+import imageIcon from '../../assets/icons/image.svg?url';
+import tableIcon from '../../assets/icons/table.svg?url';
+import videoIcon from '../../assets/icons/video.svg?url';
 
 // 手动构建 iconMap
 const iconMap: Record<string, string> = {
@@ -258,7 +257,7 @@ const fileIconMappings = [
 const defaultFileIcon = 'file';
 const defaultFolderIcon = 'folder';
 
-export function getIconPath(file: FileLike) {
+export function getIconPath(file: File) {
   let iconName = defaultFileIcon;
 
   if (file.type === 'directory') {

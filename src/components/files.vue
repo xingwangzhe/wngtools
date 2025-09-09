@@ -12,6 +12,7 @@
         <span class="file-name">{{ file.name }}</span>
         <span class="file-type">({{ file.type }})</span>
         <span class="file-path">{{ file.path }}</span>
+        <div class="delFile" @click="delFile(file)">删除</div>
       </li>
     </ul>
   </div>
@@ -22,19 +23,11 @@ import { listen } from '@tauri-apps/api/event';
 import { ref } from 'vue';
 
 // 导入拖拽处理器
-import { handleDragStart, handleFileDrop } from './script/files/dragHandler';
+import { handleDragStart, handleFileDrop } from './utils/dragHandler';
 // 导入图标映射
-import { getIconPath } from './script/files/iconMap';
-
-interface DragDropPayload {
-  paths: string[];
-}
-
-interface File {
-  name: string;
-  path: string;
-  type: string;
-}
+import { getIconPath } from './utils/iconMap';
+// 导入类型定义
+import type { DragDropPayload, File } from '../types/file';
 
 const files = ref<Set<File>>(new Set());
 
@@ -43,6 +36,13 @@ const addFile = (file: File) => {
   const existingFile = Array.from(files.value).find((f) => f.path === file.path);
   if (!existingFile) {
     files.value.add(file);
+  }
+};
+
+const delFile = (file: File) => {
+  const existingFile = Array.from(files.value).find((f) => f.path === file.path);
+  if (existingFile) {
+    files.value.delete(existingFile);
   }
 };
 
@@ -66,6 +66,22 @@ listen('tauri://drag-drop', async (e) => {
   padding: 8px 12px;
   border-bottom: 1px solid #e0e0e0;
   transition: background-color 0.2s;
+  position: relative;
+  min-height: 40px;
+}
+
+.delFile {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  padding: 2px 6px;
+  background-color: #ff4d4f;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8em;
+  user-select: none;
+  z-index: 1;
 }
 
 .file-item:hover {
