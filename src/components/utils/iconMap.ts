@@ -260,10 +260,10 @@ const defaultFolderIcon = 'folder';
 export function getIconPath(file: File) {
   let iconName = defaultFileIcon;
 
-  if (file.type === 'directory') {
+  if (file.type_ === 'directory') {
     iconName = defaultFolderIcon;
   } else {
-    const fileExt = (file.type || '').toLowerCase().replace(/^\./, '');
+    const fileExt = (file.type_ || '').toLowerCase().replace(/^\./, '');
 
     for (const mapping of fileIconMappings) {
       if (mapping.fileExtensions && mapping.fileExtensions.includes(fileExt)) {
@@ -276,12 +276,12 @@ export function getIconPath(file: File) {
   // 确保图标存在，否则使用默认图标
   const iconUrl = iconMap[iconName];
   if (iconUrl) {
-    return iconUrl;
+    return { iconUrl, iconName };
   }
 
   // 如果找不到对应图标，使用默认文件图标
   const fallbackUrl = iconMap[defaultFileIcon] || iconMap[defaultFolderIcon] || '';
-  return fallbackUrl;
+  return { iconUrl: fallbackUrl, iconName: defaultFileIcon };
 }
 
 export { iconMap };

@@ -1,6 +1,7 @@
 // 文件拖拽处理器模块
 // 负责处理从应用内部拖拽文件到外部系统的逻辑
 import type { DragDropPayload, File } from '../../types/file';
+import { getIconPath } from './iconMap';
 
 /**
  * 处理拖拽开始事件
@@ -44,11 +45,18 @@ export const handleFileDrop = async (payload: DragDropPayload, addFile: (file: F
     fileType = await extname(fullPath);
     fileName = await basename(fullPath);
   }
+
+  // 构建完整的File对象
   const file: File = {
     name: fileName,
     path: fullPath,
     type_: fileType,
+    icon: '', // 先设置为空，后续会通过getIconPath获取
   };
+
+  // 获取正确的图标路径
+  file.icon = getIconPath(file).iconName;
+
   // 添加文件到列表
   addFile(file);
 };

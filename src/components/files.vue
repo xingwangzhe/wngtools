@@ -9,7 +9,7 @@
         @dragstart="handleDragStart($event, file)"
         @click="handleFileClick(file, $event)"
       >
-        <img :src="getIconPath(file)" :alt="file.type_ + ' icon'" class="file-icon" />
+        <img :src="getIconPath(file).iconUrl" :alt="file.type_ + ' icon'" class="file-icon" />
         <span class="file-name">{{ file.name }}</span>
         <span class="file-type">({{ file.type_ }})</span>
         <span class="file-path">{{ file.path }}</span>
