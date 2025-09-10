@@ -10,6 +10,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Cache bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+            src-tauri/node_modules
+            node_modules
+          key: bun-${{ runner.os }}-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-
+
+      - name: Cache Rust dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            src-tauri/target
+          key: rust-${{ runner.os }}-${{ hashFiles('src-tauri/Cargo.lock') }}
+          restore-keys: |
+            rust-${{ runner.os }}-
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
@@ -21,7 +43,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install -y pkg-config libgtk-3-dev libglib2.0-dev libgdk-pixbuf2.0-dev
+          sudo apt install -y pkg-config libgtk-3-dev libglib2.0-dev libgdk-pixbuf2.0-dev libsoup-3.0-dev
 
       - name: Install dependencies
         run: |
