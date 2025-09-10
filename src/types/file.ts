@@ -7,4 +7,6 @@ export interface File {
   path: string;
   type_: string; // 使用 type_ 避免与 TypeScript 关键字冲突
   icon: string;
+  width?: number;
+  height?: number;
 }
