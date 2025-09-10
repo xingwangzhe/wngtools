@@ -1,6 +1,5 @@
 // 文件拖拽处理器模块
 // 负责处理从应用内部拖拽文件到外部系统的逻辑
-
 import type { DragDropPayload, File } from '../../types/file';
 
 /**
@@ -45,13 +44,11 @@ export const handleFileDrop = async (payload: DragDropPayload, addFile: (file: F
     fileType = await extname(fullPath);
     fileName = await basename(fullPath);
   }
-
-  const file = {
+  const file: File = {
     name: fileName,
     path: fullPath,
-    type: fileType,
+    type_: fileType,
   };
-
   // 添加文件到列表
   addFile(file);
 };

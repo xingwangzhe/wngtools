@@ -7,12 +7,13 @@
         class="file-item"
         draggable="true"
         @dragstart="handleDragStart($event, file)"
+        @click="handleFileClick(file, $event)"
       >
-        <img :src="getIconPath(file)" :alt="file.type + ' icon'" class="file-icon" />
+        <img :src="getIconPath(file)" :alt="file.type_ + ' icon'" class="file-icon" />
         <span class="file-name">{{ file.name }}</span>
-        <span class="file-type">({{ file.type }})</span>
+        <span class="file-type">({{ file.type_ }})</span>
         <span class="file-path">{{ file.path }}</span>
-        <div class="delFile" @click="delFile(file)">删除</div>
+        <div class="delFile" @click="delFile(file, $event)">删除</div>
       </li>
     </ul>
   </div>
@@ -28,6 +29,7 @@ import { handleDragStart, handleFileDrop } from './utils/dragHandler';
 import { getIconPath } from './utils/iconMap';
 // 导入类型定义
 import type { DragDropPayload, File } from '../types/file';
+import { addClipboard } from './utils/addClipboard';
 
 const files = ref<Set<File>>(new Set());
 
@@ -38,11 +40,30 @@ const addFile = (file: File) => {
     files.value.add(file);
   }
 };
-
-const delFile = (file: File) => {
+//删除文件索引(不是真的删除本地文件)
+const delFile = (file: File, event: Event) => {
+  event.stopPropagation(); // 阻止事件冒泡
   const existingFile = Array.from(files.value).find((f) => f.path === file.path);
   if (existingFile) {
     files.value.delete(existingFile);
+  }
+};
+
+// 处理文件点击事件，复制到剪贴板
+const handleFileClick = async (file: File, event?: Event) => {
+  console.log('File clicked:', file.name, 'Event:', event);
+  console.log('Files count:', files.value.size);
+
+  if (event) {
+    console.log('Click target:', event.target);
+    console.log('Click currentTarget:', event.currentTarget);
+  }
+
+  try {
+    await addClipboard(file);
+    console.log('Clipboard operation completed for:', file.name);
+  } catch (error) {
+    console.error('Error in handleFileClick:', error);
   }
 };
 
