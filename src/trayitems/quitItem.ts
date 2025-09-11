@@ -16,12 +16,12 @@ export const quitItem: MenuItem = await MenuItem.new({
       permissionGranted = permission === 'granted';
     }
     if (permissionGranted) {
-      console.log('准备发送退出通知');
+      // console.log('准备发送退出通知');
       try {
         await sendNotification({ title: 'Wngtools', body: '应用已关闭' });
-        console.log('退出通知发送成功');
+        // console.log('退出通知发送成功');
       } catch (error) {
-        console.error('发送退出通知失败:', error);
+        // console.error('发送退出通知失败:', error);
       }
     }
     exit(1);

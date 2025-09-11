@@ -12,11 +12,11 @@ pub fn add_clipboard(app: tauri::AppHandle, file: File) -> Result<(), String> {
         // 文档文件：读取文本内容
         let content = std::fs::read_to_string(&file.path).map_err(|e| e.to_string())?;
         clipboard.write_text(&content).map_err(|e| e.to_string())?;
-        println!(
-            "Added text content to clipboard: {} ({} chars)",
-            file.path,
-            content.len()
-        );
+        // println!(
+        //     "Added text content to clipboard: {} ({} chars)",
+        //     file.path,
+        //     content.len()
+        // );
     } else if file.icon == "image" {
         // 图像文件：解码图像数据并复制图像
         let img = ImageReader::open(&file.path)
@@ -29,12 +29,12 @@ pub fn add_clipboard(app: tauri::AppHandle, file: File) -> Result<(), String> {
         clipboard
             .write_image(&tauri_img)
             .map_err(|e| e.to_string())?;
-        println!("Added image to clipboard: {} ({}x{})", file.path, w, h);
+        // println!("Added image to clipboard: {} ({}x{})", file.path, w, h);
     } else {
         clipboard
             .write_text(&file.path)
             .map_err(|e| e.to_string())?;
-        println!("Added file path to clipboard: {}", file.path);
+        // println!("Added file path to clipboard: {}", file.path);
     }
 
     Ok(())

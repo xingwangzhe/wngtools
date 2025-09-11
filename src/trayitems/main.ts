@@ -21,7 +21,7 @@ try {
   };
   // 创建托盘图标
   const _tray = await TrayIcon.new(options);
-  console.log('系统托盘创建成功');
+  // console.log('系统托盘创建成功');
 } catch (error) {
-  console.error('创建系统托盘失败:', error);
+  // console.error('创建系统托盘失败:', error);
 }

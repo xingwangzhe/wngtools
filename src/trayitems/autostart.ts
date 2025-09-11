@@ -25,15 +25,15 @@ async function updateStateText() {
 async function checkNotificationPermission(): Promise<boolean> {
   try {
     let permissionGranted = await isPermissionGranted();
-    console.log('当前通知权限状态:', permissionGranted);
+    // console.log('当前通知权限状态:', permissionGranted);
     if (!permissionGranted) {
       const permission = await requestPermission();
-      console.log('请求通知权限结果:', permission);
+      // console.log('请求通知权限结果:', permission);
       permissionGranted = permission === 'granted';
     }
     return permissionGranted;
   } catch (error) {
-    console.error('检查通知权限时出错:', error);
+    // console.error('检查通知权限时出错:', error);
     return false;
   }
 }
@@ -42,22 +42,22 @@ async function checkNotificationPermission(): Promise<boolean> {
 async function sendStateNotification(title: string, body: string) {
   try {
     const permissionGranted = await checkNotificationPermission();
-    console.log('准备发送通知，权限状态:', permissionGranted);
+    // console.log('准备发送通知，权限状态:', permissionGranted);
     if (permissionGranted) {
       // 使用前端 API 直接发送通知
       await sendNotification({
         title: title,
         body: body,
       });
-      console.log('已通过前端 API 发送通知:', title, body);
+      // console.log('已通过前端 API 发送通知:', title, body);
 
       // 添加一个小延迟，确保通知被系统处理
       await new Promise((resolve) => setTimeout(resolve, 1000));
     } else {
-      console.log('没有通知权限，无法发送通知');
+      // console.log('没有通知权限，无法发送通知');
     }
   } catch (error) {
-    console.error('发送通知时出错:', error);
+    // console.error('发送通知时出错:', error);
   }
 }
 

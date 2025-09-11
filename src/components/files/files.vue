@@ -24,12 +24,12 @@ import { listen } from '@tauri-apps/api/event';
 import { ref } from 'vue';
 
 // 导入拖拽处理器
-import { handleDragStart, handleFileDrop } from './utils/dragHandler';
+import { handleDragStart, handleFileDrop } from './dragHandler';
 // 导入图标映射
-import { getIconPath } from './utils/iconMap';
+import { getIconPath } from './iconMap';
 // 导入类型定义
-import type { DragDropPayload, File } from '../types/file';
-import { addClipboard } from './utils/addClipboard';
+import type { DragDropPayload, File } from '../../types/file';
+import { addClipboard } from './addClipboard';
 
 const files = ref<Set<File>>(new Set());
 
@@ -51,19 +51,19 @@ const delFile = (file: File, event: Event) => {
 
 // 处理文件点击事件，复制到剪贴板
 const handleFileClick = async (file: File, event?: Event) => {
-  console.log('File clicked:', file.name, 'Event:', event);
-  console.log('Files count:', files.value.size);
+  // console.log('File clicked:', file.name, 'Event:', event);
+  // console.log('Files count:', files.value.size);
 
   if (event) {
-    console.log('Click target:', event.target);
-    console.log('Click currentTarget:', event.currentTarget);
+    // console.log('Click target:', event.target);
+    // console.log('Click currentTarget:', event.currentTarget);
   }
 
   try {
     await addClipboard(file);
-    console.log('Clipboard operation completed for:', file.name);
+    // console.log('Clipboard operation completed for:', file.name);
   } catch (error) {
-    console.error('Error in handleFileClick:', error);
+    // console.error('Error in handleFileClick:', error);
   }
 };
 

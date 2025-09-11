@@ -10,7 +10,7 @@ export const filespace = {
       // 如果窗口已存在，将其显示并聚焦
       await existingWindow.show();
       await existingWindow.setFocus();
-      console.log('已存在文件中转窗口，已将其显示');
+      // console.log('已存在文件中转窗口，已将其显示');
       return;
     }
 
@@ -27,11 +27,11 @@ export const filespace = {
     });
 
     appWindow.once('tauri://created', () => {
-      console.log('文件中转窗口已创建');
+      // console.log('文件中转窗口已创建');
     });
 
     appWindow.once('tauri://error', (e) => {
-      console.error('创建文件中转窗口时出错:', e);
+      // console.error('创建文件中转窗口时出错:', e);
     });
   },
 };

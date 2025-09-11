@@ -2,7 +2,7 @@ import { invoke } from '@tauri-apps/api/core';
 import type { File } from '../../types/file';
 
 export async function addClipboard(file: File): Promise<void> {
-  console.log('addClipboard called with file:', file);
+  // console.log('addClipboard called with file:', file);
   let width: number | undefined;
   let height: number | undefined;
 
@@ -16,9 +16,9 @@ export async function addClipboard(file: File): Promise<void> {
       });
       width = img.naturalWidth;
       height = img.naturalHeight;
-      console.log(`Image dimensions: ${width}x${height}`);
+      // console.log(`Image dimensions: ${width}x${height}`);
     } catch (error) {
-      console.warn('Failed to get image dimensions, using defaults:', error);
+      // console.warn('Failed to get image dimensions, using defaults:', error);
       width = 100;
       height = 100;
     }
@@ -28,12 +28,12 @@ export async function addClipboard(file: File): Promise<void> {
   const fileWithSize = { ...file, width, height };
 
   try {
-    console.log('Invoking add_clipboard command...');
+    // console.log('Invoking add_clipboard command...');
     const result = await invoke('add_clipboard', { file: fileWithSize });
-    console.log('Invoke result:', result);
-    console.log('File path copied to clipboard:', file.path);
+    // console.log('Invoke result:', result);
+    // console.log('File path copied to clipboard:', file.path);
   } catch (error) {
-    console.error('Failed to copy to clipboard:', error);
+    // console.error('Failed to copy to clipboard:', error);
     throw error;
   }
 }
