@@ -10,7 +10,7 @@ import { getIconPath } from './iconMap';
  */
 export const handleDragStart = (event: DragEvent, file: File) => {
   // 设置拖拽数据为文件路径和URI
-  event.dataTransfer?.setData('text/plain', file.path);
+  // event.dataTransfer?.setData('text/plain', file.path);
   event.dataTransfer?.setData('text/uri-list', `file://${file.path}`);
 
   // 设置拖拽效果为复制

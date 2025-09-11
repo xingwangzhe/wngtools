@@ -3,15 +3,15 @@
 import type {} from 'vue';
 import type { File } from '../../types/file';
 
-// 直接导入每个图标文件（作为 URL）
-import audioIcon from '../../assets/icons/audio.svg?url';
-import documentIcon from '../../assets/icons/document.svg?url';
-import exeIcon from '../../assets/icons/exe.svg?url';
-import fileIcon from '../../assets/icons/file.svg?url';
-import folderIcon from '../../assets/icons/folder.svg?url';
-import imageIcon from '../../assets/icons/image.svg?url';
-import tableIcon from '../../assets/icons/table.svg?url';
-import videoIcon from '../../assets/icons/video.svg?url';
+// 直接导入每个图标文件（作为原始内容）
+import audioIcon from '../../assets/icons/audio.svg?raw';
+import documentIcon from '../../assets/icons/document.svg?raw';
+import exeIcon from '../../assets/icons/exe.svg?raw';
+import fileIcon from '../../assets/icons/file.svg?raw';
+import folderIcon from '../../assets/icons/folder.svg?raw';
+import imageIcon from '../../assets/icons/image.svg?raw';
+import tableIcon from '../../assets/icons/table.svg?raw';
+import videoIcon from '../../assets/icons/video.svg?raw';
 
 // 手动构建 iconMap
 const iconMap: Record<string, string> = {
@@ -24,6 +24,9 @@ const iconMap: Record<string, string> = {
   table: tableIcon,
   video: videoIcon,
 };
+
+// 图标样式
+const iconStyle = 'width: 24px; height: 24px; margin-right: 8px; flex-shrink: 0;';
 
 // 7 类文件映射（与项目现有分类保持一致）
 const fileIconMappings = [
@@ -274,14 +277,14 @@ export function getIconPath(file: File) {
   }
 
   // 确保图标存在，否则使用默认图标
-  const iconUrl = iconMap[iconName];
-  if (iconUrl) {
-    return { iconUrl, iconName };
+  const iconSvg = iconMap[iconName];
+  if (iconSvg) {
+    return { iconSvg, iconName, iconStyle };
   }
 
   // 如果找不到对应图标，使用默认文件图标
-  const fallbackUrl = iconMap[defaultFileIcon] || iconMap[defaultFolderIcon] || '';
-  return { iconUrl: fallbackUrl, iconName: defaultFileIcon };
+  const fallbackSvg = iconMap[defaultFileIcon] || iconMap[defaultFolderIcon] || '';
+  return { iconSvg: fallbackSvg, iconName: defaultFileIcon, iconStyle };
 }
 
 export { iconMap };

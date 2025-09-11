@@ -1,5 +1,5 @@
 <template>
-  <div class="file-list">
+  <div v-if="page" class="file-list">
     <ul>
       <li
         v-for="file in Array.from(files)"
@@ -9,7 +9,7 @@
         @dragstart="handleDragStart($event, file)"
         @click="handleFileClick(file, $event)"
       >
-        <img :src="getIconPath(file).iconUrl" :alt="file.type_ + ' icon'" class="file-icon" />
+        <span v-html="getIconPath(file).iconSvg" :style="getIconPath(file).iconStyle"></span>
         <span class="file-name">{{ file.name }}</span>
         <span class="file-type">({{ file.type_ }})</span>
         <span class="file-path">{{ file.path }}</span>
@@ -17,21 +17,79 @@
       </li>
     </ul>
   </div>
+  <div v-else-if="!page">
+    <spawn>
+      是否启用点击对象，复制到剪切板
+      <el-switch
+        v-model="options"
+        class="ml-2"
+        inline-prompt
+        style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+        :active-icon="Check"
+        :inactive-icon="Close"
+      />
+    </spawn>
+    <spawn>
+      是否启用点击文本对象，复制内容到剪切板
+      <el-switch
+        :disabled="!opt"
+        v-model="opt1"
+        class="ml-2"
+        inline-prompt
+        style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+        :active-icon="Check"
+        :inactive-icon="Close"
+      />
+    </spawn>
+    <spawn>
+      是否启用点击图片，复制图片到剪切板
+      <el-switch
+        :disabled="!opt"
+        v-model="opt2"
+        class="ml-2"
+        inline-prompt
+        style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+        :active-icon="Check"
+        :inactive-icon="Close"
+      />
+    </spawn>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { listen } from '@tauri-apps/api/event';
 import { ref } from 'vue';
-
 // 导入拖拽处理器
 import { handleDragStart, handleFileDrop } from './dragHandler';
 // 导入图标映射
 import { getIconPath } from './iconMap';
+// 导入 Element Plus 组件
+import { Check, Close } from '@element-plus/icons-vue';
 // 导入类型定义
 import type { DragDropPayload, File } from '../../types/file';
 import { addClipboard } from './addClipboard';
-
+import { Menu } from '@tauri-apps/api/menu';
 const files = ref<Set<File>>(new Set());
+const page = ref(true);
+const options = ref(false);
+const opt1 = ref(true);
+const opt2 = ref(true);
+const opt = ref(true);
+
+// 监听主开关变化
+watch(options, (newVal) => {
+  if (!newVal) {
+    // 主开关关闭时：先让子开关值变为false（变红），再禁用
+    opt1.value = false;
+    opt2.value = false;
+    setTimeout(() => {
+      opt.value = false;
+    }, 800);
+  } else {
+    // 主开关开启时：立即启用
+    opt.value = true;
+  }
+});
 
 // 添加文件的函数
 const addFile = (file: File) => {
@@ -72,6 +130,13 @@ listen('tauri://drag-drop', async (e) => {
   const payload = e.payload as DragDropPayload;
   await handleFileDrop(payload, addFile);
 });
+// 监听来自主进程/托盘的菜单事件，切换视图
+await listen('menu:open-settings', () => {
+  page.value = false;
+});
+await listen('menu:open-files', () => {
+  page.value = true;
+});
 </script>
 
 <style>
@@ -107,13 +172,6 @@ listen('tauri://drag-drop', async (e) => {
 
 .file-item:hover {
   background-color: #f5f5f5;
-}
-
-.file-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-  flex-shrink: 0;
 }
 
 .file-name {
