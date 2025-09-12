@@ -6,6 +6,7 @@ import { filespace } from './filespace';
 import { autostart } from './autostart';
 import { quitItem } from './quitItem';
 import { restartItem } from './restart';
+// if you just want to import css
 // 直接执行创建系统托盘的代码
 try {
   // 创建菜单
