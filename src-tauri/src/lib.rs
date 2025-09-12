@@ -1,5 +1,6 @@
 mod commands;
 mod main_window_handlers;
+mod note_window_handlers;
 mod types;
 
 use tauri_plugin_window_state::StateFlags;
@@ -7,6 +8,7 @@ use tauri_plugin_window_state::StateFlags;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
         .plugin(
             tauri_plugin_window_state::Builder::new()
                 .with_state_flags(StateFlags::all().difference(StateFlags::VISIBLE))
@@ -36,9 +38,8 @@ pub fn run() {
                         .build(),
                 )?;
             }
-
             main_window_handlers::setup_window_handlers(app);
-
+            // note_window_handlers::setup_window_handlers(app);
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
