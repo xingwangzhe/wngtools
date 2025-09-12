@@ -17,8 +17,6 @@ export const filespace = {
               if (w) {
                 // 通知渲染进程切换到 files 页面
                 await w.emit('menu:open-files', {});
-                await w.show();
-                await w.setFocus();
               }
             } catch (e) {
               console.error('files-open-files action error:', e);
@@ -34,8 +32,6 @@ export const filespace = {
               if (w) {
                 // 通知渲染进程切换到 settings 页面
                 await w.emit('menu:open-settings', {});
-                await w.show();
-                await w.setFocus();
               }
             } catch (e) {
               console.error('files-open-settings action error:', e);
