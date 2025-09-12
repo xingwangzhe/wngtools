@@ -90,10 +90,10 @@ import { Menu } from '@tauri-apps/api/menu';
 const files = ref<Set<File>>(new Set());
 const page = ref(true);
 const options = ref(false);
-const optext = ref(true);
-const optImage = ref(true);
-const optOther = ref(true);
-const opt = ref(true);
+const optext = ref(false);
+const optImage = ref(false);
+const optOther = ref(false);
+const opt = ref(false);
 
 // 监听主开关变化
 watch(options, (newVal) => {
