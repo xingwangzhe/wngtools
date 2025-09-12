@@ -7,12 +7,13 @@ import { autostart } from './autostart';
 import { quitItem } from './quitItem';
 import { restartItem } from './restart';
 import { about } from './about';
+import { notes } from './note';
 // if you just want to import css
 // 直接执行创建系统托盘的代码
 try {
   // 创建菜单
   const menu = await Menu.new({
-    items: [about, filespace, autostart, restartItem, quitItem],
+    items: [about, filespace, notes, autostart, restartItem, quitItem],
   });
 
   // 配置托盘图标选项

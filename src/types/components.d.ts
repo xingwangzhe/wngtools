@@ -14,5 +14,7 @@ declare module 'vue' {
     Files: typeof import('./../components/files/files.vue')['default']
     Footer: typeof import('./../components/Footer.vue')['default']
     Header: typeof import('./../components/Header.vue')['default']
+    Note: typeof import('./../components/notes/note.vue')['default']
+    Notes: typeof import('./../components/notes/notes.vue')['default']
   }
 }
