@@ -22,6 +22,7 @@
     "@tauri-apps/plugin-notification": "~2",
     "@tauri-apps/plugin-positioner": "^2.3.0",
     "@tauri-apps/plugin-process": "^2.3.0",
+    "@tauri-apps/plugin-window-state": "~2",
     "astro": "^5.13.3",
     "element-plus": "^2.11.2",
     "vue": "^3.5.21"
