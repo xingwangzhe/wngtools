@@ -1,21 +1,27 @@
 <template>
   <div v-if="page" class="file-list">
-    <ul>
-      <li
+    <div v-if="files.size > 0">
+      <el-card
         v-for="file in Array.from(files)"
         :key="file.path"
-        class="file-item"
+        style="max-width: 400px; margin-bottom: 8px"
         draggable="true"
         @dragstart="handleDragStart($event, file)"
         @click="handleFileClick(file, $event)"
       >
-        <span v-html="getIconPath(file).iconSvg" :style="getIconPath(file).iconStyle"></span>
-        <span class="file-name">{{ file.name }}</span>
-        <span class="file-type">({{ file.type_ }})</span>
-        <span class="file-path">{{ file.path }}</span>
-        <div class="delFile" @click="delFile(file, $event)">删除</div>
-      </li>
-    </ul>
+        <template #header>
+          <div class="card-header">
+            <span v-html="getIconPath(file).iconSvg" :style="getIconPath(file).iconStyle"></span>
+            <span>{{ file.name }}</span>
+          </div>
+        </template>
+        <p class="text item">类型：{{ file.type_ }} | 路径：{{ file.path }}</p>
+        <template #footer>
+          <div class="delFile" @click="delFile(file, $event)">删除</div>
+        </template>
+      </el-card>
+    </div>
+    <div v-else class="p-4 text-center text-gray-500">拖拽文件到此处以添加到列表</div>
   </div>
   <div v-else-if="!page">
     <div>
@@ -154,56 +160,28 @@ await listen('menu:open-files', () => {
 </script>
 
 <style>
-.file-list ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.file-item {
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-bottom: 1px solid #e0e0e0;
-  transition: background-color 0.2s;
-  position: relative;
-  min-height: 40px;
-}
-
 .delFile {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  padding: 2px 6px;
+  padding: 4px 8px;
   background-color: #ff4d4f;
   color: white;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.8em;
-  user-select: none;
-  z-index: 1;
-}
-
-.file-item:hover {
-  background-color: #f5f5f5;
-}
-
-.file-name {
-  font-weight: 500;
-  flex-grow: 1;
-}
-
-.file-type {
-  color: #666;
   font-size: 0.9em;
-  margin-left: 4px;
+  user-select: none;
+  display: inline-block;
 }
 
-.file-path {
-  color: #999;
-  font-size: 0.8em;
-  margin-left: auto;
-  text-align: right;
-  flex-shrink: 0;
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header span {
+  font-weight: 500;
+}
+
+.el-card__body {
+  padding: 8px 16px;
 }
 </style>

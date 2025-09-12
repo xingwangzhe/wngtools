@@ -42,8 +42,8 @@ export const filespace = {
     });
     const fileWindow = new WebviewWindow('filespace', {
       title: '文件中转站',
-      width: 400,
-      height: 300,
+      width: 800,
+      height: 600,
       alwaysOnTop: true,
       visible: true,
       resizable: true,

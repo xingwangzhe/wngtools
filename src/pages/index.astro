@@ -1,9 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ICON from '../../src-tauri/icons/128x128.png'
+import Image from 'astro/components/Image.astro';
 ---
 
 <Layout title="Wngtools">
   <div class="welcome">
+      <div>
+          <Image src={ICON} alt="Wngtools Logo" width="128" height="128" />
+      </div>
     <h2>欢迎使用 Wngtools</h2>
     <p>这是一个 Tauri 应用，支持文件管理和主题同步。</p>
   </div>
