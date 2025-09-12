@@ -18,7 +18,7 @@
     </ul>
   </div>
   <div v-else-if="!page">
-    <spawn>
+    <div>
       是否启用点击对象，复制到剪切板
       <el-switch
         v-model="options"
@@ -28,31 +28,43 @@
         :active-icon="Check"
         :inactive-icon="Close"
       />
-    </spawn>
-    <spawn>
+    </div>
+    <div>
       是否启用点击文本对象，复制内容到剪切板
       <el-switch
         :disabled="!opt"
-        v-model="opt1"
+        v-model="optext"
         class="ml-2"
         inline-prompt
         style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
         :active-icon="Check"
         :inactive-icon="Close"
       />
-    </spawn>
-    <spawn>
+    </div>
+    <div>
       是否启用点击图片，复制图片到剪切板
       <el-switch
         :disabled="!opt"
-        v-model="opt2"
+        v-model="optImage"
         class="ml-2"
         inline-prompt
         style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
         :active-icon="Check"
         :inactive-icon="Close"
       />
-    </spawn>
+    </div>
+    <div>
+      是否启用点击其他文件，复制文件路径到剪切板
+      <el-switch
+        :disabled="!opt"
+        v-model="optOther"
+        class="ml-2"
+        inline-prompt
+        style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+        :active-icon="Check"
+        :inactive-icon="Close"
+      />
+    </div>
   </div>
 </template>
 
@@ -72,19 +84,21 @@ import { Menu } from '@tauri-apps/api/menu';
 const files = ref<Set<File>>(new Set());
 const page = ref(true);
 const options = ref(false);
-const opt1 = ref(true);
-const opt2 = ref(true);
+const optext = ref(true);
+const optImage = ref(true);
+const optOther = ref(true);
 const opt = ref(true);
 
 // 监听主开关变化
 watch(options, (newVal) => {
   if (!newVal) {
     // 主开关关闭时：先让子开关值变为false（变红），再禁用
-    opt1.value = false;
-    opt2.value = false;
+    optext.value = false;
+    optImage.value = false;
+    optOther.value = false;
     setTimeout(() => {
       opt.value = false;
-    }, 800);
+    }, 500);
   } else {
     // 主开关开启时：立即启用
     opt.value = true;
@@ -118,7 +132,7 @@ const handleFileClick = async (file: File, event?: Event) => {
   }
 
   try {
-    await addClipboard(file);
+    await addClipboard(file, optext.value, optImage.value, optOther.value);
     // console.log('Clipboard operation completed for:', file.name);
   } catch (error) {
     // console.error('Error in handleFileClick:', error);

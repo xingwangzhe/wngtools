@@ -1,12 +1,17 @@
 import { invoke } from '@tauri-apps/api/core';
 import type { File } from '../../types/file';
 
-export async function addClipboard(file: File): Promise<void> {
+export async function addClipboard(
+  file: File,
+  optext: boolean,
+  optImage: boolean,
+  optOther: boolean,
+): Promise<void> {
   // console.log('addClipboard called with file:', file);
   let width: number | undefined;
   let height: number | undefined;
 
-  if (file.icon === 'image') {
+  if (file.icon === 'image' && optImage) {
     try {
       const img = new Image();
       img.src = `file://${file.path}`;
@@ -29,7 +34,12 @@ export async function addClipboard(file: File): Promise<void> {
 
   try {
     // console.log('Invoking add_clipboard command...');
-    const result = await invoke('add_clipboard', { file: fileWithSize });
+    const result = await invoke('add_clipboard', {
+      file: fileWithSize,
+      optext,
+      optImage,
+      optOther,
+    });
     // console.log('Invoke result:', result);
     // console.log('File path copied to clipboard:', file.path);
   } catch (error) {

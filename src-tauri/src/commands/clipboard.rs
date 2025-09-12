@@ -5,10 +5,16 @@ use tauri::image::Image;
 use tauri_plugin_clipboard_manager::ClipboardExt;
 
 #[tauri::command]
-pub fn add_clipboard(app: tauri::AppHandle, file: File) -> Result<(), String> {
+pub fn add_clipboard(
+    app: tauri::AppHandle,
+    file: File,
+    optext: bool,
+    optimage: bool,
+    optother: bool,
+) -> Result<(), String> {
     let clipboard = app.clipboard();
 
-    if file.icon == "document" {
+    if file.icon == "document" && optext {
         // 文档文件：读取文本内容
         let content = std::fs::read_to_string(&file.path).map_err(|e| e.to_string())?;
         clipboard.write_text(&content).map_err(|e| e.to_string())?;
@@ -17,7 +23,7 @@ pub fn add_clipboard(app: tauri::AppHandle, file: File) -> Result<(), String> {
         //     file.path,
         //     content.len()
         // );
-    } else if file.icon == "image" {
+    } else if file.icon == "image" && optimage {
         // 图像文件：解码图像数据并复制图像
         let img = ImageReader::open(&file.path)
             .map_err(|e| e.to_string())?
@@ -30,11 +36,14 @@ pub fn add_clipboard(app: tauri::AppHandle, file: File) -> Result<(), String> {
             .write_image(&tauri_img)
             .map_err(|e| e.to_string())?;
         // println!("Added image to clipboard: {} ({}x{})", file.path, w, h);
-    } else {
+    } else if optother {
         clipboard
             .write_text(&file.path)
             .map_err(|e| e.to_string())?;
         // println!("Added file path to clipboard: {}", file.path);
+    } else {
+        // 如果没有开启相应的开关，则不执行任何操作
+        // println!("Clipboard operation skipped for file: {} (switches disabled)", file.path);
     }
 
     Ok(())
