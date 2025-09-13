@@ -1,6 +1,6 @@
 mod commands;
 mod main_window_handlers;
-mod note_window_handlers;
+// mod note_window_handlers;
 mod types;
 
 use tauri_plugin_window_state::StateFlags;
@@ -44,7 +44,8 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             commands::clipboard::add_clipboard,
-            commands::show_window::show_window
+            commands::show_window::show_window,
+            commands::save_note::save_notes,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
