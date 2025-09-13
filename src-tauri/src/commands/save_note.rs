@@ -64,8 +64,7 @@ pub fn save_notes(label: &str, content: &str, app: AppHandle) {
                 let _ = note_window_clone.close();
             }
             false => {
-                // 用户在最初确认对话框中取消：通知前端不要关闭
-                let _ = app_clone.emit_to(&label_clone, "note_close", false);
+                let _ = app_clone.emit_to(&label_clone, "note_close", true);
                 let _ = note_window_clone.close();
             }
         });
