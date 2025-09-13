@@ -33,8 +33,8 @@ jobs:
       - name: Install frontend dependencies
         run: bun install
 
-      - name: Build frontend
-        run: bun run build
+      # - name: Build frontend
+      #   run: bun run build
 
       - uses: tauri-apps/tauri-action@v0
         env:
