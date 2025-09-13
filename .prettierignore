@@ -1,15 +1,24 @@
-node_modules
-dist
-build
-target
-public/build
-.cache
-**/*.lock
-.idea
-.vscode
-src-tauri/target
-.git
-.husky
+# Dependency lock files
+package-lock.json
 pnpm-lock.yaml
 yarn.lock
-package-lock.json
+**/*.lock
+
+# Node modules, caches, and build outputs
+node_modules/
+dist/
+build/
+target/
+public/build/
+.cache/
+
+# Tauri build output
+src-tauri/target/
+
+# Git and hooks
+.git/
+.husky/
+
+# IDEs / editors
+.idea/
+.vscode/

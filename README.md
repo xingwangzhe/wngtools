@@ -11,7 +11,8 @@
 
 </div>
 
-一个正在开发的现代化的Linux桌面工具应用，基于 Astro + Vue 3 + Tauri 构建，提供文件中转等实用功能。
+一个正在开发的现代化的Linux桌面工具应用，基于 Astro + Vue 3 +
+Tauri 构建，提供文件中转等实用功能。
 
 ## 🚀 快速开始
 
@@ -129,4 +130,5 @@ Tauri是个跨平台框架，本项目不介意Mac或者Windows用户的贡献�
 
 ---
 
-**Made with ❤️ using [Astro](https://astro.build/), [Vue](https://vuejs.org/), and [Tauri](https://tauri.app/)**
+**Made with ❤️ using [Astro](https://astro.build/), [Vue](https://vuejs.org/),
+and [Tauri](https://tauri.app/)**

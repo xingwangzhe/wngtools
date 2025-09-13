@@ -5,7 +5,7 @@ export async function addClipboard(
   file: File,
   optext: boolean,
   optImage: boolean,
-  optOther: boolean,
+  optOther: boolean
 ): Promise<void> {
   // console.log('addClipboard called with file:', file);
   let width: number | undefined;
