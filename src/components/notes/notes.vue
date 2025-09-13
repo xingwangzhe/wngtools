@@ -1,10 +1,12 @@
 <template>
   <el-input
     v-model="textcontent"
-    style="width: 100%"
-    :autosize="{ minRows: 5 }"
+    style="width: 100%; min-height: 100vh"
     type="textarea"
+    :autosize="{ minRows: 20 }"
     placeholder="Please input"
+    maxlength="10000000000"
+    show-word-limit
   />
 </template>
 <script lang="ts" setup>
