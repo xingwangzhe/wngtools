@@ -1,3 +1,9 @@
+use rust_i18n::i18n;
+
+i18n!("../locales");
+
+use rust_i18n::t;
+
 mod commands;
 mod main_window_handlers;
 // mod note_window_handlers;
@@ -23,7 +29,8 @@ pub fn run() {
         .plugin(tauri_plugin_persisted_scope::init())
         .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
             println!(
-                "单实例启动: app={:?}, args={:?}, cwd={:?}",
+                "{}: app={:?}, args={:?}, cwd={:?}",
+                t!("app.singleInstance"),
                 app.package_info().name,
                 args,
                 cwd

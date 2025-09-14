@@ -1,3 +1,4 @@
+use rust_i18n::t;
 use std::fs;
 use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons};
@@ -11,13 +12,13 @@ pub fn save_notes(label: &str, content: &str, app: AppHandle) {
     let label_clone = label.to_string();
     let content_clone = content.to_string();
 
-    let result = note_window
+    let _result = note_window
         .dialog()
-        .message("Do you want to save the note?")
-        .title("Save Note")
+        .message(t!("saveNote.dialogMessage"))
+        .title(t!("saveNote.dialogTitle"))
         .buttons(MessageDialogButtons::OkCancelCustom(
-            "Save".to_string(),
-            "Cancel".to_string(),
+            t!("saveNote.saveButton").to_string(),
+            t!("saveNote.cancelButton").to_string(),
         ))
         .show(move |result| match result {
             true => {

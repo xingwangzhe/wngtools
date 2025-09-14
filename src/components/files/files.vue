@@ -78,7 +78,7 @@
 
 <script lang="ts" setup>
 import { listen } from '@tauri-apps/api/event';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 // 导入拖拽处理器
 import { handleDragStart, handleFileDrop } from './dragHandler';
 // 导入图标映射
@@ -90,8 +90,7 @@ import type { DragDropPayload, File } from '../../types/file';
 import { addClipboard } from './addClipboard';
 import { Menu } from '@tauri-apps/api/menu';
 import i18n from '../../i18n/index';
-const { t } = i18n.global;
-
+const t = i18n.t;
 const files = ref<Set<File>>(new Set());
 const page = ref(true);
 const options = ref(false);

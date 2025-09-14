@@ -10,13 +10,14 @@
   />
 </template>
 <script lang="ts" setup>
-const textcontent = ref('');
 import { ref, onMounted, onUnmounted } from 'vue';
 import i18n from '../../i18n/index';
-const { t } = i18n.global;
 import { Window } from '@tauri-apps/api/window';
 import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
+
+const t = i18n.t;
+const textcontent = ref('');
 interface Event {
   payload: boolean;
 }

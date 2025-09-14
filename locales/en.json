@@ -38,5 +38,14 @@
     "quitApp": "Quit App",
     "appClosed": "App Closed",
     "restartApp": "Restart App"
+  },
+  "saveNote": {
+    "dialogTitle": "Save Note",
+    "dialogMessage": "Do you want to save the note?",
+    "saveButton": "Save",
+    "cancelButton": "Cancel"
+  },
+  "app": {
+    "singleInstance": "Single instance started"
   }
 }

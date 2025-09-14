@@ -1,3 +1,4 @@
+use rust_i18n::t;
 use tauri::{AppHandle, Manager};
 
 #[tauri::command]
@@ -6,6 +7,6 @@ pub fn show_window(app: AppHandle) -> Result<(), String> {
         window.show().map_err(|e| e.to_string())?;
         Ok(())
     } else {
-        Err("主窗口不存在".to_string())
+        Err(t!("window_show_error").to_string())
     }
 }

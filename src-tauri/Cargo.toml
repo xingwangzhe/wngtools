@@ -49,6 +49,7 @@ tauri-plugin-fs = "2"
 tauri-plugin-clipboard-manager = "2"
 image = "0.25"
 tauri-plugin-dialog = "2"
+rust-i18n = "3.1.5"
 
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]

@@ -38,5 +38,14 @@
     "quitApp": "退出应用",
     "appClosed": "应用已关闭",
     "restartApp": "重启应用"
+  },
+  "saveNote": {
+    "dialogTitle": "保存便签",
+    "dialogMessage": "是否要保存便签？",
+    "saveButton": "保存",
+    "cancelButton": "取消"
+  },
+  "app": {
+    "singleInstance": "单实例启动"
   }
 }
