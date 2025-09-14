@@ -4,5 +4,23 @@
     "description": "This is a Tauri app that supports file management and theme synchronization.",
     "click": "Click, do not show About page next time",
     "logoAlt": "Wngtools Logo"
+  },
+  "pages": {
+    "about": "Wngtools-About",
+    "fileManagement": "File Management",
+    "notes": "Notes"
+  },
+  "files": {
+    "dragFilesHere": "Drag files here to add to the list",
+    "typeLabel": "Type:",
+    "pathLabel": "Path:",
+    "delete": "Delete",
+    "enableObjectClick": "Enable clicking objects to copy to clipboard",
+    "enableTextClick": "Enable clicking text objects to copy content to clipboard",
+    "enableImageClick": "Enable clicking images to copy to clipboard",
+    "enableOtherClick": "Enable clicking other files to copy file path to clipboard"
+  },
+  "notes": {
+    "placeholder": "Please input"
   }
 }

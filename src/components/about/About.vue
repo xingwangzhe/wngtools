@@ -14,7 +14,7 @@
 <script setup>
 import i18n from '../../i18n/index';
 
-const { t } = i18n.global;
+const t = i18n.t;
 </script>
 
 <style>

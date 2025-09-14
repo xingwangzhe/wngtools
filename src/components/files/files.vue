@@ -15,17 +15,19 @@
             <span>{{ file.name }}</span>
           </div>
         </template>
-        <p class="text item">类型：{{ file.type_ }} | 路径：{{ file.path }}</p>
+        <p class="text item">
+          {{ t('files.typeLabel') }}{{ file.type_ }} | {{ t('files.pathLabel') }}{{ file.path }}
+        </p>
         <template #footer>
-          <div class="delFile" @click="delFile(file, $event)">删除</div>
+          <div class="delFile" @click="delFile(file, $event)">{{ t('files.delete') }}</div>
         </template>
       </el-card>
     </div>
-    <div v-else class="p-4 text-center text-gray-500">拖拽文件到此处以添加到列表</div>
+    <div v-else class="p-4 text-center text-gray-500">{{ t('files.dragFilesHere') }}</div>
   </div>
   <div v-else-if="!page">
     <div>
-      是否启用点击对象，复制到剪切板
+      {{ t('files.enableObjectClick') }}
       <el-switch
         v-model="options"
         class="ml-2"
@@ -36,7 +38,7 @@
       />
     </div>
     <div>
-      是否启用点击文本对象，复制内容到剪切板
+      {{ t('files.enableTextClick') }}
       <el-switch
         :disabled="!opt"
         v-model="optext"
@@ -48,7 +50,7 @@
       />
     </div>
     <div>
-      是否启用点击图片，复制图片到剪切板
+      {{ t('files.enableImageClick') }}
       <el-switch
         :disabled="!opt"
         v-model="optImage"
@@ -60,7 +62,7 @@
       />
     </div>
     <div>
-      是否启用点击其他文件，复制文件路径到剪切板
+      {{ t('files.enableOtherClick') }}
       <el-switch
         :disabled="!opt"
         v-model="optOther"
@@ -87,6 +89,9 @@ import { Check, Close } from '@element-plus/icons-vue';
 import type { DragDropPayload, File } from '../../types/file';
 import { addClipboard } from './addClipboard';
 import { Menu } from '@tauri-apps/api/menu';
+import i18n from '../../i18n/index';
+const { t } = i18n.global;
+
 const files = ref<Set<File>>(new Set());
 const page = ref(true);
 const options = ref(false);

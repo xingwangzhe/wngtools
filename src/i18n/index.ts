@@ -1,18 +1,18 @@
-import { createI18n } from 'vue-i18n';
-
+import i18n from 'i18next';
 import zh from '../../locales/zh.json';
 import en from '../../locales/en.json';
 
-const messages = {
-  zh,
-  en,
-};
-
-const i18n = createI18n({
-  legacy: false,
-  locale: 'en', // 默认语言
-  fallbackLocale: 'en',
-  messages,
+i18n.init({
+  lng: 'en',
+  fallbackLng: 'en',
+  resources: {
+    zh: {
+      translation: zh,
+    },
+    en: {
+      translation: en,
+    },
+  },
 });
 
 export default i18n;

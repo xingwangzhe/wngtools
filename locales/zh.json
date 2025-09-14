@@ -4,5 +4,23 @@
     "description": "这是一个 Tauri 应用，支持文件管理和主题同步。",
     "click": "点击,下次启动不再显示About页",
     "logoAlt": "Wngtools Logo"
+  },
+  "pages": {
+    "about": "Wngtools-About",
+    "fileManagement": "文件管理",
+    "notes": "便签"
+  },
+  "files": {
+    "dragFilesHere": "拖拽文件到此处以添加到列表",
+    "typeLabel": "类型：",
+    "pathLabel": "路径：",
+    "delete": "删除",
+    "enableObjectClick": "是否启用点击对象，复制到剪切板",
+    "enableTextClick": "是否启用点击文本对象，复制内容到剪切板",
+    "enableImageClick": "是否启用点击图片，复制图片到剪切板",
+    "enableOtherClick": "是否启用点击其他文件，复制文件路径到剪切板"
+  },
+  "notes": {
+    "placeholder": "请输入"
   }
 }

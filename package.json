@@ -26,8 +26,8 @@
     "@tauri-apps/plugin-window-state": "~2",
     "astro": "^5.13.3",
     "element-plus": "^2.11.2",
-    "vue": "^3.5.21",
-    "vue-i18n": "^11.1.12"
+    "i18next": "^25.5.2",
+    "vue": "^3.5.21"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.8.3",
