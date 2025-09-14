@@ -22,5 +22,21 @@
   },
   "notes": {
     "placeholder": "请输入"
+  },
+  "tray": {
+    "about": "关于",
+    "createFileTransfer": "创建文件中转",
+    "fileTransferStation": "文件中转站",
+    "settings": "设置",
+    "createNote": "创建便贴",
+    "note": "便贴",
+    "autostart": "开机自启",
+    "autostartEnabled": "已开机自启🟢",
+    "autostartDisabled": "已关闭自启🔴",
+    "autostartDisabledNotification": "已关闭自启🔴",
+    "autostartEnabledNotification": "已开机自启🟢",
+    "quitApp": "退出应用",
+    "appClosed": "应用已关闭",
+    "restartApp": "重启应用"
   }
 }

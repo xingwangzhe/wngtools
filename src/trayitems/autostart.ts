@@ -5,12 +5,13 @@ import {
   requestPermission,
   sendNotification,
 } from '@tauri-apps/plugin-notification';
+import i18n from '../i18n/index';
 // 获取当前状态文本
 export async function getAutostartStateText(): Promise<string> {
   if (await isEnabled()) {
-    return '已开机自启🟢';
+    return i18n.t('tray.autostartEnabled');
   } else {
-    return '已关闭自启🔴';
+    return i18n.t('tray.autostartDisabled');
   }
 }
 
@@ -65,12 +66,12 @@ async function changestate() {
   let text = '';
   if (await isEnabled()) {
     await disable();
-    text = '已关闭自启🔴';
-    await sendStateNotification('Wngtools', '已关闭自启🔴');
+    text = i18n.t('tray.autostartDisabled');
+    await sendStateNotification('Wngtools', i18n.t('tray.autostartDisabledNotification'));
   } else {
     await enable();
-    text = '已开机自启🟢';
-    await sendStateNotification('Wngtools', '已开机自启🟢');
+    text = i18n.t('tray.autostartEnabled');
+    await sendStateNotification('Wngtools', i18n.t('tray.autostartEnabledNotification'));
   }
   await autostart.setText(text);
   return text;
@@ -83,7 +84,7 @@ setTimeout(async () => {
 
 export const autostart: MenuItem = await MenuItem.new({
   id: 'autostart',
-  text: '开机自启',
+  text: i18n.t('tray.autostart'),
   action: async () => {
     await changestate();
   },

@@ -1,16 +1,17 @@
 import { WebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { Menu } from '@tauri-apps/api/menu';
+import i18n from '../i18n/index';
 
 export const filespace = {
   id: 'toggle',
-  text: '创建文件中转',
+  text: i18n.t('tray.createFileTransfer'),
   action: async () => {
     // 构建菜单（注意：只构建，绑定后会调用菜单 action）
     const menu = await Menu.new({
       items: [
         {
           id: 'files-open-files',
-          text: '文件中转站',
+          text: i18n.t('tray.fileTransferStation'),
           action: async () => {
             try {
               const w = await WebviewWindow.getByLabel('filespace');
@@ -25,7 +26,7 @@ export const filespace = {
         },
         {
           id: 'files-open-settings',
-          text: '设置',
+          text: i18n.t('tray.settings'),
           action: async () => {
             try {
               const w = await WebviewWindow.getByLabel('filespace');
@@ -41,7 +42,7 @@ export const filespace = {
       ],
     });
     const fileWindow = new WebviewWindow('filespace', {
-      title: '文件中转站',
+      title: i18n.t('tray.fileTransferStation'),
       width: 800,
       height: 600,
       alwaysOnTop: true,

@@ -22,5 +22,21 @@
   },
   "notes": {
     "placeholder": "Please input"
+  },
+  "tray": {
+    "about": "About",
+    "createFileTransfer": "Create File Transfer",
+    "fileTransferStation": "File Transfer Station",
+    "settings": "Settings",
+    "createNote": "Create Note",
+    "note": "Note",
+    "autostart": "Autostart",
+    "autostartEnabled": "Autostart Enabled 🟢",
+    "autostartDisabled": "Autostart Disabled 🔴",
+    "autostartDisabledNotification": "Autostart Disabled 🔴",
+    "autostartEnabledNotification": "Autostart Enabled 🟢",
+    "quitApp": "Quit App",
+    "appClosed": "App Closed",
+    "restartApp": "Restart App"
   }
 }

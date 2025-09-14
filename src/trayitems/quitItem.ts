@@ -5,10 +5,11 @@ import {
   requestPermission,
   sendNotification,
 } from '@tauri-apps/plugin-notification';
+import i18n from '../i18n/index';
 
 export const quitItem: MenuItem = await MenuItem.new({
   id: 'quitItem',
-  text: '退出应用',
+  text: i18n.t('tray.quitApp'),
   action: async () => {
     let permissionGranted = await isPermissionGranted();
     if (!permissionGranted) {
@@ -18,7 +19,7 @@ export const quitItem: MenuItem = await MenuItem.new({
     if (permissionGranted) {
       // console.log('准备发送退出通知');
       try {
-        await sendNotification({ title: 'Wngtools', body: '应用已关闭' });
+        await sendNotification({ title: 'Wngtools', body: i18n.t('tray.appClosed') });
         // console.log('退出通知发送成功');
       } catch (error) {
         // console.error('发送退出通知失败:', error);
