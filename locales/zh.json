@@ -1,0 +1,8 @@
+{
+  "welcome": {
+    "title": "欢迎使用 Wngtools",
+    "description": "这是一个 Tauri 应用，支持文件管理和主题同步。",
+    "click": "点击,下次启动不再显示About页",
+    "logoAlt": "Wngtools Logo"
+  }
+}

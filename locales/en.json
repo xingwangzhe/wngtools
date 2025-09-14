@@ -1,0 +1,8 @@
+{
+  "welcome": {
+    "title": "Welcome to Wngtools",
+    "description": "This is a Tauri app that supports file management and theme synchronization.",
+    "click": "Click, do not show About page next time",
+    "logoAlt": "Wngtools Logo"
+  }
+}

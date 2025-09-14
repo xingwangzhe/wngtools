@@ -2,17 +2,19 @@
   <div>
     <div class="welcome">
       <div>
-        <img src="/wngtools-icon.png" alt="Wngtools Logo" width="128" height="128" />
+        <img src="/wngtools-icon.png" :alt="t('welcome.logoAlt')" width="128" height="128" />
       </div>
-      <h2>欢迎使用 Wngtools</h2>
-      <p>这是一个 Tauri 应用，支持文件管理和主题同步。</p>
+      <h2>{{ t('welcome.title') }}</h2>
+      <p>{{ t('welcome.description') }}</p>
     </div>
-    <div>点击,下次启动不再显示About页</div>
+    <div>{{ t('welcome.click') }}</div>
   </div>
 </template>
 
 <script setup>
-// No script needed for now
+import i18n from '../../i18n/index';
+
+const { t } = i18n.global;
 </script>
 
 <style>
