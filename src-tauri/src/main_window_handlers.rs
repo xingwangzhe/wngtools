@@ -6,9 +6,11 @@ pub fn setup_window_handlers(app: &mut App) {
     let main_window_clone = main_window.clone();
     main_window.on_window_event(move |event| {
         if let WindowEvent::CloseRequested { api, .. } = event {
-            // 隐藏窗口而不是关闭应用
-            let _ = main_window_clone.hide();
-            api.prevent_close();
+            // 确保窗口处于正常状态
+            if main_window_clone.is_visible().unwrap_or(false) {
+                let _ = main_window_clone.hide();
+                api.prevent_close();
+            }
         }
     });
 }
