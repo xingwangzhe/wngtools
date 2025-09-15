@@ -14,25 +14,25 @@
     "check": "oxlint src/components src/script --ignore-pattern '**/*.astro' && prettier --check ."
   },
   "dependencies": {
-    "@astrojs/vue": "^5.1.0",
+    "@astrojs/vue": "^5.1.1",
     "@tauri-apps/api": "^2.8.0",
-    "@tauri-apps/plugin-autostart": "~2",
-    "@tauri-apps/plugin-clipboard-manager": "~2",
-    "@tauri-apps/plugin-dialog": "~2",
-    "@tauri-apps/plugin-fs": "~2",
-    "@tauri-apps/plugin-notification": "~2",
+    "@tauri-apps/plugin-autostart": "~2.5.0",
+    "@tauri-apps/plugin-clipboard-manager": "~2.3.0",
+    "@tauri-apps/plugin-dialog": "~2.4.0",
+    "@tauri-apps/plugin-fs": "~2.4.2",
+    "@tauri-apps/plugin-notification": "~2.3.1",
     "@tauri-apps/plugin-positioner": "^2.3.0",
     "@tauri-apps/plugin-process": "^2.3.0",
-    "@tauri-apps/plugin-window-state": "~2",
-    "astro": "^5.13.3",
+    "@tauri-apps/plugin-window-state": "~2.4.0",
+    "astro": "^5.13.7",
     "element-plus": "^2.11.2",
     "i18next": "^25.5.2",
     "vue": "^3.5.21"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.8.3",
-    "oxlint": "^0.9.0",
-    "prettier": "^3.3.0",
+    "@tauri-apps/cli": "^2.8.4",
+    "oxlint": "^0.9.10",
+    "prettier": "^3.6.2",
     "unplugin-auto-import": "^20.1.0",
     "unplugin-vue-components": "^29.0.0"
   }
