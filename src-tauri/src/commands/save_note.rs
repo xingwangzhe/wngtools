@@ -1,4 +1,5 @@
-use rust_i18n::t;
+use crate::commands::locale::t_with_current_locale;
+use log::{debug, error};
 use std::fs;
 use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_dialog::{DialogExt, MessageDialogButtons};
@@ -14,11 +15,11 @@ pub fn save_notes(label: &str, content: &str, app: AppHandle) {
 
     let _result = note_window
         .dialog()
-        .message(t!("saveNote.dialogMessage"))
-        .title(t!("saveNote.dialogTitle"))
+        .message(t_with_current_locale("saveNote.dialogMessage"))
+        .title(t_with_current_locale("saveNote.dialogTitle"))
         .buttons(MessageDialogButtons::OkCancelCustom(
-            t!("saveNote.saveButton").to_string(),
-            t!("saveNote.cancelButton").to_string(),
+            t_with_current_locale("saveNote.saveButton"),
+            t_with_current_locale("saveNote.cancelButton"),
         ))
         .show(move |result| match result {
             true => {
@@ -40,10 +41,10 @@ pub fn save_notes(label: &str, content: &str, app: AppHandle) {
                                     Ok(_) => {
                                         // 保存成功：通知前端（此处使用 note_close true 表示可以关闭）
                                         let _ = app_clone.emit_to(&label_clone, "note_close", true);
-                                        println!("Note saved to {:?}", pathbuf);
+                                        debug!("Note saved to {:?}", pathbuf);
                                     }
                                     Err(e) => {
-                                        eprintln!("Failed to write note to {:?}: {}", pathbuf, e);
+                                        error!("Failed to write note to {:?}: {}", pathbuf, e);
                                         let _ =
                                             app_clone.emit_to(&label_clone, "note_close", false);
                                     }
@@ -58,7 +59,7 @@ pub fn save_notes(label: &str, content: &str, app: AppHandle) {
                     None => {
                         // 用户在保存对话框中取消：通知前端不要关闭
                         let _ = app_clone.emit_to(&label_clone, "note_close", false);
-                        println!("Save dialog cancelled by user");
+                        debug!("Save dialog cancelled by user");
                     }
                 }
 

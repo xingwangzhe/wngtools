@@ -14,6 +14,16 @@ export default defineConfig({
 
   // Vite 配置：在这里添加插件以支持按需自动导入
   vite: {
+    // 在生产环境中移除 console.log
+    esbuild: {
+      drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    },
+    // 构建配置
+    build: {
+      minify: 'esbuild',
+      // 生产环境下关闭source map以减少包体积
+      sourcemap: process.env.NODE_ENV !== 'production',
+    },
     plugins: [
       // 自动导入组合式 API（和 Element Plus 的部分函数）
       AutoImport({

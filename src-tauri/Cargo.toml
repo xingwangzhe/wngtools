@@ -22,7 +22,9 @@ opt-level = "z" # 优先考虑小的二进制文件大小。如果您更喜欢�
 panic = "abort" # 通过禁用 panic 处理程序来提高性能。
 strip = true # 确保移除调试符号。
 rpath = false # 避免硬编码库路径以减小大小。
-# rustflags = ["-Cdebuginfo=0"] # 移除 debuginfo 以进一步减小大小。
+debug = false # 禁用调试信息
+debug-assertions = false # 禁用调试断言
+overflow-checks = false # 禁用溢出检查
 
 
 
@@ -38,9 +40,9 @@ tauri-build = { version = "2.4.0", features = [] }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-log = "0.4"
+log = { version = "0.4", features = ["release_max_level_off"] }
 tauri = { version = "2.8.3", features = [ "tray-icon"] }
-tauri-plugin-log = "2"
+tauri-plugin-log = { version = "2", features = ["colored"] }
 tauri-plugin-positioner = { version = "2.0.0", features = ["tray-icon"] }
 tauri-plugin-persisted-scope = "2.0.0"
 tauri-plugin-process = "2"
@@ -50,6 +52,7 @@ tauri-plugin-clipboard-manager = "2"
 image = "0.25"
 tauri-plugin-dialog = "2"
 rust-i18n = "3.1.5"
+lazy_static = "1.4"
 
 
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]

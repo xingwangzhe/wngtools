@@ -17,6 +17,13 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
   </head>
   <body>
     <slot />
+    <!-- 临时测试按钮 -->
+    <div id="debug-language" style="position: fixed; top: 10px; right: 10px; z-index: 9999; background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 5px; font-family: monospace; font-size: 12px;">
+      <div>当前语言: <span id="current-lang">检测中...</span></div>
+      <button id="test-zh-cn" style="margin: 2px; padding: 4px 8px; font-size: 11px;">测试中文</button>
+      <button id="test-en" style="margin: 2px; padding: 4px 8px; font-size: 11px;">测试英文</button>
+      <button id="test-zh-hk" style="margin: 2px; padding: 4px 8px; font-size: 11px;">测试繁体</button>
+    </div>
   </body>
 </html>
 
@@ -66,4 +73,63 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
 
   // 页面加载时设置语言
   setLanguageAttribute();
+
+  // 添加测试按钮功能
+  function setupLanguageTest() {
+    const currentLangSpan = document.getElementById('current-lang');
+    const testZhCnBtn = document.getElementById('test-zh-cn');
+    const testEnBtn = document.getElementById('test-en');
+    const testZhHkBtn = document.getElementById('test-zh-hk');
+
+    // 显示当前检测到的语言
+    if (currentLangSpan) {
+      const language = navigator.language || navigator.languages?.[0] || 'en';
+      const lowerLang = language.toLowerCase();
+      let detectedLang = 'en';
+
+      if (lowerLang.startsWith('zh-cn') || lowerLang.startsWith('zh-hans')) {
+        detectedLang = 'zh-CN';
+      } else if (
+        lowerLang.startsWith('zh-hk') ||
+        lowerLang.startsWith('zh-tw') ||
+        lowerLang.startsWith('zh-hant') ||
+        lowerLang.startsWith('zh-mo')
+      ) {
+        detectedLang = 'zh-HK';
+      }
+
+      currentLangSpan.textContent = detectedLang;
+    }
+
+    // 测试发送语言到后端
+    async function testSendLanguage(langCode) {
+      try {
+        const { invoke } = await import('@tauri-apps/api/core');
+        console.log(`🧪 测试发送语言: ${langCode}`);
+        await invoke('set_language_from_frontend', { languageCode: langCode });
+        console.log(`✅ 成功发送语言: ${langCode}`);
+
+        // 更新显示
+        if (currentLangSpan) {
+          currentLangSpan.textContent = langCode + ' (手动设置)';
+        }
+      } catch (error) {
+        console.error(`❌ 发送语言失败: ${langCode}`, error);
+      }
+    }
+
+    // 绑定按钮事件
+    if (testZhCnBtn) {
+      testZhCnBtn.onclick = () => testSendLanguage('zh-CN');
+    }
+    if (testEnBtn) {
+      testEnBtn.onclick = () => testSendLanguage('en');
+    }
+    if (testZhHkBtn) {
+      testZhHkBtn.onclick = () => testSendLanguage('zh-HK');
+    }
+  }
+
+  // 设置测试功能
+  setTimeout(setupLanguageTest, 100);
 </script>
