@@ -1,0 +1,51 @@
+{
+  "welcome": {
+    "title": "歡迎使用 Wngtools",
+    "description": "這是一個 Tauri 應用程式，支援檔案管理和主題同步。",
+    "click": "點擊，下次啟動不再顯示About頁",
+    "logoAlt": "Wngtools Logo"
+  },
+  "pages": {
+    "about": "Wngtools-About",
+    "fileManagement": "檔案管理",
+    "notes": "便籤"
+  },
+  "files": {
+    "dragFilesHere": "拖拽檔案到此處以新增到清單",
+    "typeLabel": "類型：",
+    "pathLabel": "路徑：",
+    "delete": "刪除",
+    "enableObjectClick": "是否啟用點擊物件，複製到剪貼簿",
+    "enableTextClick": "是否啟用點擊文字物件，複製內容到剪貼簿",
+    "enableImageClick": "是否啟用點擊圖片，複製圖片到剪貼簿",
+    "enableOtherClick": "是否啟用點擊其他檔案，複製檔案路徑到剪貼簿"
+  },
+  "notes": {
+    "placeholder": "請輸入"
+  },
+  "tray": {
+    "about": "關於",
+    "createFileTransfer": "建立檔案中轉",
+    "fileTransferStation": "檔案中轉站",
+    "settings": "設定",
+    "createNote": "建立便籤",
+    "note": "便籤",
+    "autostart": "開機自啟",
+    "autostartEnabled": "已開機自啟🟢",
+    "autostartDisabled": "已關閉自啟🔴",
+    "autostartDisabledNotification": "已關閉自啟🔴",
+    "autostartEnabledNotification": "已開機自啟🟢",
+    "quitApp": "結束應用程式",
+    "appClosed": "應用程式已關閉",
+    "restartApp": "重新啟動應用程式"
+  },
+  "saveNote": {
+    "dialogTitle": "儲存便籤",
+    "dialogMessage": "是否要儲存便籤？",
+    "saveButton": "儲存",
+    "cancelButton": "取消"
+  },
+  "app": {
+    "singleInstance": "單一實例啟動"
+  }
+}

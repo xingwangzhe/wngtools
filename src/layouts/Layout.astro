@@ -21,6 +21,7 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
 </html>
 
 <script>
+  // 主题切换逻辑
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
   if (mediaQuery.matches) {
     document.documentElement.classList.add('dark');
@@ -34,4 +35,35 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
       document.documentElement.classList.remove('dark');
     }
   });
+
+  // 自动设置HTML语言属性
+  function setLanguageAttribute() {
+    // 获取浏览器语言设置
+    const language = navigator.language || navigator.languages?.[0] || 'en';
+
+    // 根据完整的语言代码进行匹配
+    const lowerLang = language.toLowerCase();
+
+    let detectedLang = 'en';
+
+    if (lowerLang.startsWith('zh-cn') || lowerLang.startsWith('zh-hans')) {
+      detectedLang = 'zh-CN';
+    } else if (
+      lowerLang.startsWith('zh-tw') ||
+      lowerLang.startsWith('zh-hant') ||
+      lowerLang.startsWith('zh-hk') ||
+      lowerLang.startsWith('zh-mo')
+    ) {
+      detectedLang = 'zh-TW';
+    } else if (lowerLang.startsWith('zh')) {
+      // 默认情况下，如果只是 'zh'，默认简体
+      detectedLang = 'zh-CN';
+    }
+
+    // 设置HTML lang属性
+    document.documentElement.setAttribute('lang', detectedLang);
+  }
+
+  // 页面加载时设置语言
+  setLanguageAttribute();
 </script>
