@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import zhCN from '../../locales/zh-CN.json';
-import zhTW from '../../locales/zh-TW.json';
+import zhHK from '../../locales/zh-HK.json';
 import en from '../../locales/en.json';
 
 // 自动检测系统语言
@@ -16,12 +16,12 @@ function detectSystemLanguage(): string {
     if (lowerLang.startsWith('zh-cn') || lowerLang.startsWith('zh-hans')) {
       return 'zh-CN';
     } else if (
+      lowerLang.startsWith('zh-hk') ||
       lowerLang.startsWith('zh-tw') ||
       lowerLang.startsWith('zh-hant') ||
-      lowerLang.startsWith('zh-hk') ||
       lowerLang.startsWith('zh-mo')
     ) {
-      return 'zh-TW';
+      return 'zh-HK';
     } else if (lowerLang.startsWith('zh')) {
       // 默认情况下，如果只是 'zh'，根据地区判断，默认简体
       return 'zh-CN';
@@ -45,8 +45,8 @@ i18n.init({
     'zh-CN': {
       translation: zhCN,
     },
-    'zh-TW': {
-      translation: zhTW,
+    'zh-HK': {
+      translation: zhHK,
     },
     en: {
       translation: en,

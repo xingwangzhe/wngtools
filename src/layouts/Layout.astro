@@ -49,12 +49,12 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
     if (lowerLang.startsWith('zh-cn') || lowerLang.startsWith('zh-hans')) {
       detectedLang = 'zh-CN';
     } else if (
+      lowerLang.startsWith('zh-hk') ||
       lowerLang.startsWith('zh-tw') ||
       lowerLang.startsWith('zh-hant') ||
-      lowerLang.startsWith('zh-hk') ||
       lowerLang.startsWith('zh-mo')
     ) {
-      detectedLang = 'zh-TW';
+      detectedLang = 'zh-HK';
     } else if (lowerLang.startsWith('zh')) {
       // 默认情况下，如果只是 'zh'，默认简体
       detectedLang = 'zh-CN';
