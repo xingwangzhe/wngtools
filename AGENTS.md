@@ -263,6 +263,11 @@ bun run tauri build
 
 ## 📋 AI Collaboration Suggestions
 
+### Dependency Management Rules
+- **Prohibited**: Manual modification of dependencies and dependency relationships
+- **Required**: Use command line tools to automatically handle dependency management
+- **Examples**: Use `bun add`, `bun remove`, `cargo add`, `cargo remove` instead of editing package.json or Cargo.toml directly
+
 ### Understanding the Project
 1. First read README.md to understand project background
 2. Check package.json and Cargo.toml to understand dependencies

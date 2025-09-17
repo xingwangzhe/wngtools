@@ -6,15 +6,28 @@
       </div>
       <h2>{{ t('welcome.title') }}</h2>
       <p>{{ t('welcome.description') }}</p>
+      <p>V:{{ Wversion }}</p>
+      <p>
+        <el-link @click="openGithub">
+          <img src="/github.svg" alt="GitHub" />
+          <div>{{ t('welcome.github') }}</div>
+        </el-link>
+      </p>
     </div>
-    <div>{{ t('welcome.click') }}</div>
   </div>
 </template>
 
 <script setup>
 import i18n from '../../i18n/index';
+import { invoke } from '@tauri-apps/api/core';
 
 const t = i18n.t;
+
+const openGithub = async () => {
+  await invoke('shell_open_github');
+};
+
+const Wversion = await invoke('get_version');
 </script>
 
 <style>

@@ -3,7 +3,8 @@
     "title": "歡迎使用 Wngtools",
     "description": "這是一個 Tauri 應用程式，支援檔案管理和主題同步。",
     "click": "點擊，下次啟動不再顯示About頁",
-    "logoAlt": "Wngtools Logo"
+    "logoAlt": "Wngtools Logo",
+    "github": "訪問源代碼倉庫"
   },
   "pages": {
     "about": "Wngtools-About",

@@ -45,6 +45,9 @@
     ]
   },
   "plugins": {
+    "shell": {
+      "open": true
+    },
     "window": {
       "allowlist": ["create", "show", "hide", "close", "setFocus"]
     },
