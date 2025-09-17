@@ -75,6 +75,7 @@ pub fn run() {
             commands::locale::get_supported_languages,
             commands::opengithub::shell_open_github,
             commands::get_version::get_version,
+            commands::open_path::open_path,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

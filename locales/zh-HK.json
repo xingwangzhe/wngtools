@@ -16,6 +16,7 @@
     "typeLabel": "類型：",
     "pathLabel": "路徑：",
     "delete": "刪除",
+    "open": "打開",
     "enableObjectClick": "是否啟用點擊物件，複製到剪貼簿",
     "enableTextClick": "是否啟用點擊文字物件，複製內容到剪貼簿",
     "enableImageClick": "是否啟用點擊圖片，複製圖片到剪貼簿",

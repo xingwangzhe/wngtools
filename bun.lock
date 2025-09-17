@@ -11,6 +11,7 @@
         "@tauri-apps/plugin-dialog": "~2.4.0",
         "@tauri-apps/plugin-fs": "~2.4.2",
         "@tauri-apps/plugin-notification": "~2.3.1",
+        "@tauri-apps/plugin-opener": "^2.5.0",
         "@tauri-apps/plugin-positioner": "^2.3.0",
         "@tauri-apps/plugin-process": "^2.3.0",
         "@tauri-apps/plugin-shell": "^2.3.1",
@@ -347,6 +348,8 @@
     "@tauri-apps/plugin-fs": ["@tauri-apps/plugin-fs@2.4.2", "https://registry.npmmirror.com/@tauri-apps/plugin-fs/-/plugin-fs-2.4.2.tgz", { "dependencies": { "@tauri-apps/api": "^2.8.0" } }, "sha512-YGhmYuTgXGsi6AjoV+5mh2NvicgWBfVJHHheuck6oHD+HC9bVWPaHvCP0/Aw4pHDejwrvT8hE3+zZAaWf+hrig=="],
 
     "@tauri-apps/plugin-notification": ["@tauri-apps/plugin-notification@2.3.1", "", { "dependencies": { "@tauri-apps/api": "^2.8.0" } }, "sha512-7gqgfANSREKhh35fY1L4j3TUjUdePmU735FYDqRGeIf8nMXWpcx6j4FhN9/4nYz+m0mv79DCTPLqIPTySggGgg=="],
+
+    "@tauri-apps/plugin-opener": ["@tauri-apps/plugin-opener@2.5.0", "https://registry.npmmirror.com/@tauri-apps/plugin-opener/-/plugin-opener-2.5.0.tgz", { "dependencies": { "@tauri-apps/api": "^2.8.0" } }, "sha512-B0LShOYae4CZjN8leiNDbnfjSrTwoZakqKaWpfoH6nXiJwt6Rgj6RnVIffG3DoJiKsffRhMkjmBV9VeilSb4TA=="],
 
     "@tauri-apps/plugin-positioner": ["@tauri-apps/plugin-positioner@2.3.0", "https://registry.npmmirror.com/@tauri-apps/plugin-positioner/-/plugin-positioner-2.3.0.tgz", { "dependencies": { "@tauri-apps/api": "^2.6.0" } }, "sha512-YMRcvA+WcULnAS+UjqGLP9ekWAgmBCgvkzT2OTkE8TWcu9jVo/Z79K0nEJhDuhZO/O0b77X0Opd+wDkEDYPeDw=="],
 

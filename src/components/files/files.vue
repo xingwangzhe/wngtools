@@ -19,6 +19,7 @@
           {{ t('files.typeLabel') }}{{ file.type_ }} | {{ t('files.pathLabel') }}{{ file.path }}
         </p>
         <template #footer>
+          <div class="openFile" @click="openFile(file, $event)">{{ t('files.open') }}</div>
           <div class="delFile" @click="delFile(file, $event)">{{ t('files.delete') }}</div>
         </template>
       </el-card>
@@ -89,6 +90,7 @@ import { Check, Close } from '@element-plus/icons-vue';
 import type { DragDropPayload, File } from '../../types/file';
 import { addClipboard } from './addClipboard';
 import { Menu } from '@tauri-apps/api/menu';
+import { open } from '@tauri-apps/plugin-opener';
 import i18n from '../../i18n/index';
 const t = i18n.t;
 const files = ref<Set<File>>(new Set());
@@ -154,6 +156,16 @@ listen('tauri://drag-drop', async (e) => {
   const payload = e.payload as DragDropPayload;
   await handleFileDrop(payload, addFile);
 });
+// 打开文件或文件夹
+const openFile = async (file: File, event: Event) => {
+  event.stopPropagation(); // 阻止事件冒泡
+  try {
+    await open(file.path);
+  } catch (error) {
+    console.error('Error opening file:', error);
+  }
+};
+
 // 监听来自主进程/托盘的菜单事件，切换视图
 await listen('menu:open-settings', () => {
   page.value = false;
@@ -164,6 +176,18 @@ await listen('menu:open-files', () => {
 </script>
 
 <style>
+.openFile {
+  padding: 4px 8px;
+  background-color: #67c23a;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  user-select: none;
+  display: inline-block;
+  margin-right: 8px;
+}
+
 .delFile {
   padding: 4px 8px;
   background-color: #ff4d4f;

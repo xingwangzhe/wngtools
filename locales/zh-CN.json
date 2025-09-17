@@ -16,6 +16,7 @@
     "typeLabel": "类型：",
     "pathLabel": "路径：",
     "delete": "删除",
+    "open": "打开",
     "enableObjectClick": "是否启用点击对象，复制到剪切板",
     "enableTextClick": "是否启用点击文本对象，复制内容到剪切板",
     "enableImageClick": "是否启用点击图片，复制图片到剪切板",

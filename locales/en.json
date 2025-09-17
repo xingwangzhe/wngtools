@@ -16,6 +16,7 @@
     "typeLabel": "Type:",
     "pathLabel": "Path:",
     "delete": "Delete",
+    "open": "Open",
     "enableObjectClick": "Enable clicking objects to copy to clipboard",
     "enableTextClick": "Enable clicking text objects to copy content to clipboard",
     "enableImageClick": "Enable clicking images to copy to clipboard",
