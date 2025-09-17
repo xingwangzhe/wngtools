@@ -67,7 +67,6 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             commands::clipboard::add_clipboard,
-            commands::show_window::show_window,
             commands::save_note::save_notes,
             commands::locale::set_language_from_frontend,
             commands::locale::get_current_language,

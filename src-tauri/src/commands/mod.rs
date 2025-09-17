@@ -4,4 +4,3 @@ pub mod locale;
 pub mod open_path;
 pub mod opengithub;
 pub mod save_note;
-pub mod show_window;

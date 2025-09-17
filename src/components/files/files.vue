@@ -90,7 +90,7 @@ import { Check, Close } from '@element-plus/icons-vue';
 import type { DragDropPayload, File } from '../../types/file';
 import { addClipboard } from './addClipboard';
 import { Menu } from '@tauri-apps/api/menu';
-import { open } from '@tauri-apps/plugin-opener';
+import { openPath } from '@tauri-apps/plugin-opener';
 import i18n from '../../i18n/index';
 const t = i18n.t;
 const files = ref<Set<File>>(new Set());
@@ -160,7 +160,7 @@ listen('tauri://drag-drop', async (e) => {
 const openFile = async (file: File, event: Event) => {
   event.stopPropagation(); // 阻止事件冒泡
   try {
-    await open(file.path);
+    await openPath(file.path);
   } catch (error) {
     console.error('Error opening file:', error);
   }
